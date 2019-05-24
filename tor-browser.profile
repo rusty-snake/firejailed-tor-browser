@@ -34,8 +34,6 @@ include globals.local
 
 ignore noexec ${HOME}
 
-noblacklist ${HOME}/.tor-browser
-
 # Allow python (blacklisted by disable-interpreters.inc)
 noblacklist ${PATH}/python2*
 noblacklist ${PATH}/python3*
@@ -52,7 +50,6 @@ include disable-passwdmgr.inc
 include disable-programs.inc
 include disable-xdg.inc
 
-mkdir ${HOME}/.tor-browser
 whitelist ${HOME}/.tor-browser
 include whitelist-common.inc
 include whitelist-var-common.inc
