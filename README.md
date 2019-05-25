@@ -24,7 +24,7 @@ Version: 0.0.0 (**WIP**)
     ```sh
     $ wget -O - https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master/tor-browser.desktop | sed "s/USER/$USER/g" > $HOME/.local/share/applications/tor-browser.desktop
     ```
-  * Now you can start the Tor Browser from your DesktopEnvironment
+  * Now you can start the Tor Browser from your DesktopEnvironment or by running `firejail --profile=tor-browser $HOME/.tor-browser/Browser/start-tor-browser`.
 
 --------------------
 
