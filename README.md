@@ -2,7 +2,7 @@
 
 Version: 0.0.0 (**WIP**)
 
-  * Install [firejail](https://firejail.wordpress.com/) ([repo](https://github.com/netblue30/firejail)) 0.9.60-rc1 or newer.
+  * Install [firejail](https://firejail.wordpress.com/) ([repo](https://github.com/netblue30/firejail)) lastet git.
   * Download the [Tor Browser](https://www.torproject.org/download/)  
     Recommendations:
     * english (en\_US)
