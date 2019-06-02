@@ -61,7 +61,7 @@ cd .tor-browser
 
 # Extract the Tor Brower to ~/.tor-browser
 echo "${MSG_PRFX}Info: Extracting the tor browser ..."
-tar -xJf $HOME/Downloads/tor-browser-linux64-8.5_en-US.tar.xz
+tar -xJf "$1"
 echo "${MSG_PRFX}Info: tor browser is extracted"
 
 # Fix the directory structure.

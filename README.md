@@ -10,7 +10,11 @@ Version: 0.0.0 (**WIP**)
     * 64bit
     * not alpha
   * Verify the signatur as descripted [here](https://www.torproject.org/docs/verifying-signatures.html.en).
-  * Execute the `install_FTB.sh` or do the following steps:
+  * Execute the `install_FTB.sh` script in a terminal:
+    ```bash
+    $ ./install_FTB.sh ~/Downloads/tor-browser-linux64-8.5_en-US.tar.xz # Note that this must be an absolute path
+    ```
+    Or do the following steps:
     * Create a directory named `.tor-browser` in your HOME-directory.
     * Extract the TBB archive to `.tor-browser` with the following directory structure:
     ```
