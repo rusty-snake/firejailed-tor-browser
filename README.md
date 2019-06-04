@@ -4,11 +4,6 @@ Version: 0.0.0 (**WIP**)
 
   * Install [firejail](https://firejail.wordpress.com/) ([repo](https://github.com/netblue30/firejail)) lastet git.
   * Download the [Tor Browser](https://www.torproject.org/download/)  
-    Recommendations:
-    * english (en\_US)
-    * linux
-    * 64bit
-    * not alpha
   * Verify the signatur as descripted [here](https://www.torproject.org/docs/verifying-signatures.html.en).
   * Execute the `install_FTB.sh` script in a terminal:
     ```bash
