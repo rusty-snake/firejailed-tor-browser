@@ -7,7 +7,7 @@ Version: 0.0.0 (**WIP**)
   * Verify the signatur as descripted [here](https://www.torproject.org/docs/verifying-signatures.html.en).
   * Execute the `install_FTB.sh` script in a terminal:
     ```bash
-    $ ./install_FTB.sh ~/Downloads/tor-browser-linux64-8.5_en-US.tar.xz # Note that this must be an absolute path
+    $ ./install_FTB.sh ~/Downloads/tor-browser-linux64-8.5.1_en-US.tar.xz # Note that this must be an absolute path
     ```
     Or do the following steps:
     * Create a directory named `.tor-browser` in your HOME-directory.
@@ -20,7 +20,7 @@ Version: 0.0.0 (**WIP**)
     ```
     * Copy the `tor-browser.profile` file from this repo to `$HOME/.config/firejail/tor-browser.profile`.
     * Copy the `tor-browser.desktop` file from this repo to `$HOME/.local/share/applications/tor-browser.desktop` and replace each occurrence of the string USER with your USERNAME. You can do this by running the following in a terminal:
-    ```sh
+    ```bash
     $ wget -O - https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master/tor-browser.desktop | sed "s/USER/$USER/g" > $HOME/.local/share/applications/tor-browser.desktop
     ```
   * Now you can start the Tor Browser from your DesktopEnvironment or by running `firejail --profile=tor-browser $HOME/.tor-browser/Browser/start-tor-browser`.

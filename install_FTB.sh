@@ -72,7 +72,7 @@ if [ -n `which wget` ]; then
 	echo "${MSG_PRFX}Info: Using wget for downloading."
 	# Download the firejail profile
 	echo "${MSG_PRFX}Info: Downloading the firejail profile ..."
-	# HACK: writing to stdout and redirecting to prevent permission error when wget is firejailed.
+	# HACK: writing to stdout and redirecting, to prevent permission error when wget is firejailed.
 	wget ${REPO_DATA_BASE_URL}/tor-browser.profile -O - > ~/.config/firejail/tor-browser.profile
 	# Downlaod the .desktop file and fix the paths in the file.
 	echo "${MSG_PRFX}Info: Downloading the .desktop file ..."
