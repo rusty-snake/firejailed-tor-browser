@@ -54,23 +54,10 @@ if [ -z `which tar` ]; then
 	exit 1
 fi
 
-# tar extract to ., so we need to go to .tor-browser
-cd .tor-browser
-
-# FIXME: Don't hardcode the filename
-
 # Extract the Tor Brower to ~/.tor-browser
 echo "${MSG_PRFX}Info: Extracting the tor browser ..."
-tar -xJf "$1"
+tar -C .tor-browser --strip 1 -xJf "$1"
 echo "${MSG_PRFX}Info: tor browser is extracted"
-
-# Fix the directory structure.
-mv tor-browser_en-US/* .
-rmdir tor-browser_en-US
-echo "${MSG_PRFX}Info: directory structure in $HOME/.tor-browser fixed"
-
-# go back to $HOME
-cd
 
 # Make sure that these directorys exists
 mkdir -v -p $HOME/.config/firejail
