@@ -21,7 +21,7 @@ Version: 0.0.0 (**WIP**)
     * Copy the `tor-browser.profile` file from this repo to `$HOME/.config/firejail/tor-browser.profile`.
     * Copy the `tor-browser.desktop` file from this repo to `$HOME/.local/share/applications/tor-browser.desktop` and replace each occurrence of the string USER with your USERNAME. You can do this by running the following in a terminal:
     ```bash
-    $ wget -O - https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master/tor-browser.desktop | sed "s/USER/$USER/g" > $HOME/.local/share/applications/tor-browser.desktop
+    $ wget -O - https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master/tor-browser.desktop | sed "s:HOME:${HOME}:g" > $HOME/.local/share/applications/tor-browser.desktop
     ```
   * Now you can start the Tor Browser from your DesktopEnvironment or by running `firejail --profile=tor-browser $HOME/.tor-browser/Browser/start-tor-browser`.
 

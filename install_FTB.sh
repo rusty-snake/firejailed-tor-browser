@@ -76,7 +76,7 @@ if [ -n `which wget` ]; then
 	wget ${REPO_DATA_BASE_URL}/tor-browser.profile -O - > ~/.config/firejail/tor-browser.profile
 	# Downlaod the .desktop file and fix the paths in the file.
 	echo "${MSG_PRFX}Info: Downloading the .desktop file ..."
-	wget -O - ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s/USER/$USER/g" > $HOME/.local/share/applications/tor-browser.desktop
+	wget -O - ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s:HOME:${HOME}:g" > $HOME/.local/share/applications/tor-browser.desktop
 else 
 	# Try to download with curl if wget isn't installed
 	if [ -n `which curl` ]; then
@@ -86,7 +86,7 @@ else
 		curl ${REPO_DATA_BASE_URL}/tor-browser.profile -O ~/.config/firejail/tor-browser.profile
 		# Downlaod the .desktop file and fix the paths in the file.
 		echo "${MSG_PRFX}Info: Downloading the .desktop file ..."
-		curl ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s/USER/$USER/g" > $HOME/.local/share/applications/tor-browser.desktop
+		curl ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s:HOME:${HOME}:g" > $HOME/.local/share/applications/tor-browser.desktop
 	else
 		# We _need_ wget or curl
 		echo "${MSG_PRFX}Error: Please install wget or curl."
