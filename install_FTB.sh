@@ -34,7 +34,11 @@ MSG_PRFX="install_FTB.sh: "
 function dont_overwrite_file {
 	if [ -e $1 ]; then
 		echo "${MSG_PRFX}Warning: $1 already exists, renaming to $1.bak."
-		mv -v -T $1 $1.bak
+		if [ -e $1.bak ]; then
+			echo "${MSG_PRFX}Warning: $1.bak already exists, removing $1.bak."
+			rm -rf $1.bak
+		fi
+		mv -v $1 $1.bak
 	fi
 }
 
