@@ -38,6 +38,9 @@ ignore noexec ${HOME}
 include allow-python2.inc
 include allow-python3.inc
 
+blacklist /opt
+blacklist /srv
+
 include disable-common.inc
 include disable-devel.inc
 include disable-exec.inc
@@ -70,7 +73,8 @@ notv
 nou2f
 novideo
 protocol unix,inet,inet6
-seccomp.drop @clock,@cpu-emulation,@debug,@module,@obsolete,@raw-io,@reboot,@resources,@swap,acct,add_key,bpf,fanotify_init,io_cancel,io_destroy,io_getevents,io_setup,io_submit,ioprio_set,kcmp,keyctl,mount,name_to_handle_at,nfsservctl,ni_syscall,open_by_handle_at,personality,pivot_root,process_vm_readv,ptrace,remap_file_pages,request_key,setdomainname,sethostname,syslog,umount,umount2,userfaultfd,vhangup,vmsplice
+# @default without chroot and mincore
+seccomp.drop @clock,@module,@raw-io,@reboot,@swap,@cpu-emulation,@debug,@obsolete,@resources,acct,bpf,mount,nfsservctl,pivot_root,setdomainname,sethostname,umount2,vhangup,add_key,fanotify_init,io_cancel,io_destroy,io_getevents,ioprio_set,io_setup,io_submit,kcmp,keyctl,name_to_handle_at,ni_syscall,open_by_handle_at,remap_file_pages,request_key,syslog,umount,userfaultfd,vmsplice
 shell none
 # Cause some issues.
 #tracelog
@@ -79,7 +83,8 @@ disable-mnt
 private-bin bash,cp,dirname,env,expr,file,getconf,gpg,grep,id,ln,mkdir,python*,readlink,rm,sed,sh,tail,tar,tclsh,test,xz
 private-cache
 private-dev
-private-etc fonts,hostname,hosts,resolv.conf,pki,ssl,ca-certificates,crypto-policies,alsa,asound.conf,pulse,machine-id,ld.so.cache
-private-opt none
-private-srv none
+private-etc alsa,asound.conf,alternatives,ca-certificates,crypto-policies,fonts,hostname,hosts,ld.so.cache,machine-id,pki,pulse,resolv.conf,ssl
 private-tmp
+
+name tor-browser
+#read-only ${HOME}
