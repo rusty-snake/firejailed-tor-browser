@@ -42,14 +42,11 @@ function dont_overwrite_file {
 	fi
 }
 
-# Make sure that we are in $HOME
-cd
-
 # Make sure .tor-browser can be used
-dont_overwrite_file .tor-browser
+dont_overwrite_file ${HOME}/.tor-browser
 
 # The tor browser will be installed in ~/.tor-browser.
-mkdir .tor-browser
+mkdir ${HOME}/.tor-browser
 echo "${MSG_PRFX}Info: directory ${HOME}/.tor-browser created"
 
 # We need tar to extract the tor browser
@@ -60,7 +57,7 @@ fi
 
 # Extract the Tor Brower to ~/.tor-browser
 echo "${MSG_PRFX}Info: Extracting the tor browser ..."
-tar -C .tor-browser --strip 1 -xJf "$1"
+tar -C ${HOME}/.tor-browser --strip 1 -xJf "$1"
 echo "${MSG_PRFX}Info: tor browser is extracted"
 
 # Make sure that these directorys exists
