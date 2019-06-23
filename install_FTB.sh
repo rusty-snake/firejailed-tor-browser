@@ -57,7 +57,7 @@ fi
 
 # Extract the Tor Brower to ~/.tor-browser
 echo "${MSG_PRFX}Info: Extracting the tor browser ..."
-tar -C ${HOME}/.tor-browser --strip 1 -xJf "$1"
+tar -C ${HOME}/.tor-browser --strip 1 -xvJf "$1"
 echo "${MSG_PRFX}Info: tor browser is extracted"
 
 # Make sure that these directorys exists
