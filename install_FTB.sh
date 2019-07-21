@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# MIT License
-#
 # Copyright (c) 2019 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
