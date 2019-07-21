@@ -32,44 +32,44 @@ MSG_PRFX="install_FTB.sh: "
 
 # Rename a file/dir instead of overwriting
 function dont_overwrite_file {
-	if [ -e $1 ]; then
+	if [ -e "$1" ]; then
 		echo "${MSG_PRFX}Warning: $1 already exists, renaming to $1.bak."
-		if [ -e $1.bak ]; then
+		if [ -e "$1.bak" ]; then
 			echo "${MSG_PRFX}Warning: $1.bak already exists, removing $1.bak."
-			rm -rf $1.bak
+			rm -rf "$1.bak"
 		fi
-		mv -v $1 $1.bak
+		mv -v "$1" "$1.bak"
 	fi
 }
 
 # Make sure .tor-browser can be used
-dont_overwrite_file ${HOME}/.tor-browser
+dont_overwrite_file "${HOME}/.tor-browser"
 
 # The tor browser will be installed in ~/.tor-browser.
-mkdir ${HOME}/.tor-browser
+mkdir "${HOME}/.tor-browser"
 echo "${MSG_PRFX}Info: directory ${HOME}/.tor-browser created"
 
 # We need tar to extract the tor browser
-if [ -z `which tar` ]; then
+if [ -z "$(command -v tar)" ]; then
 	echo "${MSG_PRFX}Error: Please install tar."
 	exit 1
 fi
 
 # Extract the Tor Brower to ~/.tor-browser
 echo "${MSG_PRFX}Info: Extracting the tor browser ..."
-tar -C ${HOME}/.tor-browser --strip 1 -xvJf "$1"
+tar -C "${HOME}/.tor-browser" --strip 1 -xvJf "$1"
 echo "${MSG_PRFX}Info: tor browser is extracted"
 
 # Make sure that these directorys exists
-mkdir -v -p $HOME/.config/firejail
-mkdir -v -p $HOME/.local/share/applications
+mkdir -v -p "$HOME/.config/firejail"
+mkdir -v -p "$HOME/.local/share/applications"
 
 # Make sure that these file can be used safely.
-dont_overwrite_file $HOME/.config/firejail/tor-browser.profile
-dont_overwrite_file $HOME/.local/share/applications/tor-browser.desktop
+dont_overwrite_file "$HOME/.config/firejail/tor-browser.profile"
+dont_overwrite_file "$HOME/.local/share/applications/tor-browser.desktop"
 
 # Downloading the files using wget if it is installed
-if [ -n `which wget` ]; then
+if [ -n "$(command -v wget)" ]; then
 	echo "${MSG_PRFX}Info: Using wget for downloading."
 	# Download the firejail profile
 	echo "${MSG_PRFX}Info: Downloading the firejail profile ..."
@@ -77,17 +77,17 @@ if [ -n `which wget` ]; then
 	wget ${REPO_DATA_BASE_URL}/tor-browser.profile -O - > ~/.config/firejail/tor-browser.profile
 	# Downlaod the .desktop file and fix the paths in the file.
 	echo "${MSG_PRFX}Info: Downloading the .desktop file ..."
-	wget -O - ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s:HOME:${HOME}:g" > $HOME/.local/share/applications/tor-browser.desktop
+	wget -O - ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s:HOME:${HOME}:g" > "$HOME/.local/share/applications/tor-browser.desktop"
 else 
 	# Try to download with curl if wget isn't installed
-	if [ -n `which curl` ]; then
+	if [ -n "$(command -v curl)" ]; then
 		echo "${MSG_PRFX}Info: Using curl for downloading."
 		# Download the firejail profile
 		echo "${MSG_PRFX}Info: Downloading the firejail profile ..."
 		curl ${REPO_DATA_BASE_URL}/tor-browser.profile -O ~/.config/firejail/tor-browser.profile
 		# Downlaod the .desktop file and fix the paths in the file.
 		echo "${MSG_PRFX}Info: Downloading the .desktop file ..."
-		curl ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s:HOME:${HOME}:g" > $HOME/.local/share/applications/tor-browser.desktop
+		curl ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s:HOME:${HOME}:g" > "$HOME/.local/share/applications/tor-browser.desktop"
 	else
 		# We _need_ wget or curl
 		echo "${MSG_PRFX}Error: Please install wget or curl."
