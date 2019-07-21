@@ -31,9 +31,9 @@ MSG_PRFX="install_FTB.sh: "
 # Rename a file/dir instead of overwriting
 function dont_overwrite_file {
 	if [ -e "$1" ]; then
-		echo "${MSG_PRFX}Warning: $1 already exists, renaming to $1.bak."
+		echo "${MSG_PRFX}Warning: $1 already exists, renaming to $1.bak"
 		if [ -e "$1.bak" ]; then
-			echo "${MSG_PRFX}Warning: $1.bak already exists, removing $1.bak."
+			echo "${MSG_PRFX}Warning: $1.bak already exists, removing $1.bak"
 			rm -rf "$1.bak"
 		fi
 		mv -v "$1" "$1.bak"
@@ -74,7 +74,7 @@ if [ -n "$(command -v wget)" ]; then
 	# HACK: writing to stdout and redirecting, to prevent permission error when wget is firejailed.
 	wget ${REPO_DATA_BASE_URL}/tor-browser.profile -O - > ~/.config/firejail/tor-browser.profile
 	# Downlaod the .desktop file and fix the paths in the file.
-	echo "${MSG_PRFX}Info: Downloading the .desktop file ..."
+	echo "${MSG_PRFX}Info: Downloading and installing tor-browser.desktop ..."
 	wget -O - ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s:HOME:${HOME}:g" > "$HOME/.local/share/applications/tor-browser.desktop"
 else 
 	# Try to download with curl if wget isn't installed
@@ -85,9 +85,9 @@ else
 		curl ${REPO_DATA_BASE_URL}/tor-browser.profile -O ~/.config/firejail/tor-browser.profile
 		# Downlaod the .desktop file and fix the paths in the file.
 		echo "${MSG_PRFX}Info: Downloading the .desktop file ..."
-		curl ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s:HOME:${HOME}:g" > "$HOME/.local/share/applications/tor-browser.desktop"
+		curl ${REPO_DATA_BASE_URL}/tor-browser.desktop | sed "s,HOME,${HOME},g" > "$HOME/.local/share/applications/tor-browser.desktop"
 	else
-		# We _need_ wget or curl
+		# We need wget or curl
 		echo "${MSG_PRFX}Error: Please install wget or curl."
 		exit 1
 	fi
