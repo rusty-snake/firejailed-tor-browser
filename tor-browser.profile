@@ -53,12 +53,12 @@ include whitelist-var-common.inc
 
 apparmor
 caps.drop all
-# Cause some issues.
+# Cause some issues
 #ipc-namespace
-# Disable sound, enable if you don't need
+# Breaks sound; enable it if you don't need sound
 #machine-id
 netfilter
-# Disable hardware acceleration.
+# Disable hardware acceleration
 #no3d
 nodbus
 nodvd
@@ -74,7 +74,7 @@ protocol unix,inet,inet6
 # @default without chroot and mincore
 seccomp.drop @clock,@module,@raw-io,@reboot,@swap,@cpu-emulation,@debug,@obsolete,@resources,acct,bpf,mount,nfsservctl,pivot_root,setdomainname,sethostname,umount2,vhangup,add_key,fanotify_init,io_cancel,io_destroy,io_getevents,ioprio_set,io_setup,io_submit,kcmp,keyctl,name_to_handle_at,ni_syscall,open_by_handle_at,remap_file_pages,request_key,syslog,umount,userfaultfd,vmsplice
 shell none
-# Cause some issues.
+# Cause some issues
 #tracelog
 
 disable-mnt
