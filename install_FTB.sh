@@ -33,7 +33,7 @@ function dont_overwrite_file {
 	if [ -e "$1" ]; then
 		echo "${MSG_PRFX}Warning: $1 already exists, renaming to $1.bak"
 		if [ -e "$1.bak" ]; then
-			echo "${MSG_PRFX}Warning: $1.bak already exists, removing $1.bak"
+			echo "${MSG_PRFX}Warning: $1.bak already exists, deleting $1.bak"
 			rm -rf "$1.bak"
 		fi
 		mv -v "$1" "$1.bak"

@@ -87,4 +87,3 @@ private-etc alsa,asound.conf,ca-certificates,crypto-policies,fonts,hostname,host
 private-tmp
 
 name tor-browser
-#read-only ${HOME}
