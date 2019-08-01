@@ -26,7 +26,7 @@
 ###########################################################
 
 # Persistent local customizations
-include tor-browser.local
+include firejailed-tor-browser.local
 # Persistent global definitions
 include globals.local
 
@@ -47,7 +47,7 @@ include disable-passwdmgr.inc
 include disable-programs.inc
 include disable-xdg.inc
 
-whitelist ${HOME}/.tor-browser
+whitelist ${HOME}/.firejailed-tor-browser
 include whitelist-common.inc
 include whitelist-var-common.inc
 
@@ -86,4 +86,4 @@ private-etc alsa,asound.conf,ca-certificates,crypto-policies,fonts,hostname,host
 #private-lib libX11-xcb.so.1,libXt.so.6
 private-tmp
 
-name tor-browser
+name firejailed-tor-browser

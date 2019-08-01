@@ -10,18 +10,18 @@ Version: 0.0.1
     $ ./install_FTB.sh ~/Downloads/tor-browser-linux64-8.5.4_en-US.tar.xz
     ```
     Or do the following steps:
-    * Create a directory named `.tor-browser` in your HOME-directory.
-    * Extract the TBB archive to `.tor-browser` with the following directory structure:
+    * Create a directory named `.firejailed-tor-browser` in your HOME-directory.
+    * Extract the TBB archive to `.firejailed-tor-browser` with the following directory structure:
     ```
-    $ ls $HOME/.tor-browser
+    $ ls $HOME/.firejailed-tor-browser
     Browser/  start-tor-browser.desktop
     ```
-    * Copy the `tor-browser.profile` file from this repo to `$HOME/.config/firejail/tor-browser.profile`.
-    * Copy the `tor-browser.desktop` file from this repo to `$HOME/.local/share/applications/tor-browser.desktop` and replace each occurrence of the string HOME with the content of `$HOME`. You can do this by running the following in a terminal:
+    * Copy the `firejailed-tor-browser.profile` file from this repo to `$HOME/.config/firejail/firejailed-tor-browser.profile`.
+    * Copy the `firejailed-tor-browser.desktop` file from this repo to `$HOME/.local/share/applications/firejailed-tor-browser.desktop` and replace each occurrence of the string HOME with the content of `$HOME`. You can do this by running the following in a terminal:
     ```bash
-    $ wget -O - https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master/tor-browser.desktop | sed "s,HOME,${HOME},g" > $HOME/.local/share/applications/tor-browser.desktop
+    $ wget -O - https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master/firejailed-tor-browser.desktop | sed "s,HOME,${HOME},g" > $HOME/.local/share/applications/firejailed-tor-browser.desktop
     ```
-  * Now you can start the Tor Browser from your DesktopEnvironment or by running `firejail --profile=tor-browser $HOME/.tor-browser/Browser/start-tor-browser`.
+  * Now you can start the Tor Browser from your DesktopEnvironment or by running `firejail --profile=firejailed-tor-browser $HOME/.tor-browser/Browser/start-tor-browser`.
 
 --------------------
 

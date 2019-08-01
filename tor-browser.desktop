@@ -31,8 +31,8 @@ Type=Application
 Name=Tor Browser
 GenericName=Web Browser
 Comment=Tor Browser is +1 for privacy and -1 for mass surveillance
-Icon=HOME/.tor-browser/Browser/browser/chrome/icons/default/default128.png
-Exec=sh -c 'firejail --profile=HOME/.config/firejail/tor-browser.profile HOME/.tor-browser/Browser/start-tor-browser'
+Icon=HOME/.firejailed-tor-browser/Browser/browser/chrome/icons/default/default128.png
+Exec=sh -c 'firejail --profile=HOME/.config/firejail/firejailed-tor-browser.profile HOME/.firejailed-tor-browser/Browser/start-tor-browser'
 Path=HOME
 Categories=Network;Security;WebBrowser;
 Keywords=TBB;
