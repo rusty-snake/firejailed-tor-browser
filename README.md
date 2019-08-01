@@ -1,6 +1,6 @@
 # HOWTO: Firejailed Tor Browser #
 
-Version: 0.0.1
+Version: 0.0.2
 
   * Install [firejail](https://firejail.wordpress.com/) ([repo](https://github.com/netblue30/firejail)) lastet git.
   * Download the [Tor Browser](https://www.torproject.org/download/)  
