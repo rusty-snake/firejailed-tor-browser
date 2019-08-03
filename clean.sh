@@ -31,11 +31,11 @@ if [ "$1" == "--help" ]; then
 	echo "If no parameters are passed, only backups are deleted."
 fi
 if [ "$1" == "--all" ]; then
-	rm -r -f -v ${HOME}/.firejailed-tor-browser*
-	rm -r -f -v ${HOME}/.config/firejail/firejailed-tor-browser.profile*
-	rm -r -f -v ${HOME}/.local/share/applications/firejailed-tor-browser.desktop*
+	rm -r -f -v "${HOME}"/.firejailed-tor-browser*
+	rm -r -f -v "${HOME}"/.config/firejail/firejailed-tor-browser.profile*
+	rm -r -f -v "${HOME}"/.local/share/applications/firejailed-tor-browser.desktop*
 else
-	rm -r -f -v ${HOME}/.firejailed-tor-browser.bak-*
-	rm -r -f -v ${HOME}/.config/firejail/firejailed-tor-browser.profile.bak-*
-	rm -r -f -v ${HOME}/.local/share/applications/firejailed-tor-browser.desktop.bak-*
+	rm -r -f -v "${HOME}"/.firejailed-tor-browser.bak-*
+	rm -r -f -v "${HOME}"/.config/firejail/firejailed-tor-browser.profile.bak-*
+	rm -r -f -v "${HOME}"/.local/share/applications/firejailed-tor-browser.desktop.bak-*
 fi
