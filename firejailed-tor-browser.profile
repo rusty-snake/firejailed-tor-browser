@@ -81,7 +81,7 @@ disable-mnt
 private-bin bash,cat,cp,cut,dirname,env,expr,file,getconf,grep,gxmessage,id,kdialog,ln,mkdir,pwd,readlink,realpath,rm,sed,sh,tail,tclsh,test,update-desktop-database,xmessage,zenity
 private-cache
 private-dev
-private-etc alsa,asound.conf,ca-certificates,crypto-policies,fonts,hostname,hosts,ld.so.cache,machine-id,pki,pulse,resolv.conf,ssl
+private-etc alsa,asound.conf,ca-certificates,crypto-policies,fonts,hostname,hosts,ld.so.cache,machine-id,passwd,pki,pulse,resolv.conf,ssl
 # Experimental
 #private-lib libX11-xcb.so.1,libXt.so.6
 private-tmp
