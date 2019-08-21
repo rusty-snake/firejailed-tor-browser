@@ -32,7 +32,7 @@ Name=Tor Browser
 GenericName=Web Browser
 Comment=Tor Browser is +1 for privacy and -1 for mass surveillance
 Icon=HOME/.firejailed-tor-browser/Browser/browser/chrome/icons/default/default128.png
-Exec=sh -c 'firejail --profile=firejailed-tor-browser HOME/.firejailed-tor-browser/Browser/start-tor-browser'
+Exec=sh -c 'firejail --profile=firejailed-tor-browser "HOME/Browser/start-tor-browser"'
 Categories=Network;Security;WebBrowser;
 Keywords=TBB;
 StartupNotify=true

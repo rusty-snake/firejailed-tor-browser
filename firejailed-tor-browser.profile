@@ -30,14 +30,15 @@ include firejailed-tor-browser.local
 # Persistent global definitions
 include globals.local
 
-ignore noexec ${HOME}
+# Note: PluggableTransports didn't work with this profile
 
-# Allow python (blacklisted by disable-interpreters.inc)
-include allow-python2.inc
-include allow-python3.inc
+ignore noexec ${HOME}
 
 blacklist /opt
 blacklist /srv
+blacklist /usr/games
+blacklist /usr/local
+blacklist /usr/src
 
 include disable-common.inc
 include disable-devel.inc
@@ -48,7 +49,8 @@ include disable-programs.inc
 include disable-xdg.inc
 
 whitelist ${HOME}/.firejailed-tor-browser
-include whitelist-common.inc
+# Add the next line to firejailed-tor-browser.local to enable better desktop integration
+#include whitelist-common.inc
 include whitelist-var-common.inc
 
 apparmor
@@ -73,15 +75,26 @@ novideo
 protocol unix,inet,inet6
 # @default-nodebuggers without chroot
 seccomp.drop @clock,@cpu-emulation,@debug,@module,@obsolete,@raw-io,@reboot,@resources,@swap,acct,add_key,bpf,fanotify_init,io_cancel,io_destroy,io_getevents,io_setup,io_submit,ioprio_set,kcmp,keyctl,mount,name_to_handle_at,nfsservctl,ni_syscall,open_by_handle_at,personality,pivot_root,process_vm_readv,ptrace,remap_file_pages,request_key,setdomainname,sethostname,syslog,umount,umount2,userfaultfd,vhangup,vmsplice
+seccomp.block-secondary
 shell none
 # Cause some issues
 #tracelog
 
 disable-mnt
-private-bin bash,cat,cp,cut,dirname,env,expr,file,getconf,grep,gxmessage,id,kdialog,ln,mkdir,pwd,readlink,realpath,rm,sed,sh,tail,tclsh,test,update-desktop-database,xmessage,zenity
+private ${HOME}/.firejailed-tor-browser
+# These are the minimum required programms to start the TBB,
+# you maybe need to add one or more programs from the commented private-bin line below.
+# To get full support of the scripts start-tor-browser, execdesktop and firefox
+# (this is a wrapper script, the firefox browser executable is firerfox.real) in the TBB,
+# add the commented private-bin line to firejailed-tor-browser.local
+private-bin bash,dirname,env,expr,file,grep,rm,sh,tclsh
+#private-bin cat,cp,cut,getconf,id,kdialog,ln,mkdir,pwd,readlink,realpath,sed,tail,test,update-desktop-database,xmessage,xmessage,zenity
 private-cache
 private-dev
-private-etc alsa,asound.conf,ca-certificates,crypto-policies,fonts,hostname,hosts,ld.so.cache,machine-id,passwd,pki,pulse,resolv.conf,ssl
+# This is a minimal private-etc, if there are breakages due it you need to add more files.
+# To get ideas what maybe needs to be added look at the templates:
+# https://github.com/netblue30/firejail/blob/28142bbc49ecc3246033cbc810d7f04027c87f4d/etc/templates/profile.template#L151-L162
+private-etc machine-id
 # Experimental
 #private-lib libX11-xcb.so.1,libXt.so.6
 private-tmp
