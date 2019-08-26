@@ -27,8 +27,10 @@ FJ_PROFILE="firejailed-tor-browser.profile"
 DESKTOP_FILE="firejailed-tor-browser.desktop"
 
 function backup_file {
-	[ ! -e "$1" ] || mv "$1" "$1.bak-$(date --iso-8601=seconds)"
-	echo "[ Ok ] backup of $1 created"
+	if [ -e "$1" ]; then
+		mv "$1" "$1.bak-$(date --iso-8601=seconds)"
+		echo "[ Ok ] backup of $1 created"
+	fi
 }
 
 function download_with_wget {
