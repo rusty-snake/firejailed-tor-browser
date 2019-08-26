@@ -57,6 +57,7 @@ include whitelist-var-common.inc
 
 apparmor
 caps.drop all
+hostname host
 # Cause some issues
 #ipc-namespace
 # Breaks sound; enable it if you don't need sound
