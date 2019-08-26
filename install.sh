@@ -75,9 +75,73 @@ function prepare_filesystem {
 	echo "[ Ok ] filesystem prepared"
 }
 
+function usage {
+	echo "Usage:"
+	echo "    ./install.sh [OPTIONS] [--] <PATH_TO_TOR_BROWSER_ARCHIV>"
+	echo ""
+	echo " OPTIONS:"
+	echo "    --help,-h,-?        Show this help and exit."
+	echo "    --update            Not implemented yet."
+	echo "    --firejail=VERSION  Not implemented yet."
+	echo "    --clean             Not implemented yet."
+	echo "    --clean-all         Not implemented yet."
+}
+
+function parse_arguments {
+	SHOW_HELP="false"
+	ONLY_UPDATE="false"
+	CLEAN="false"
+	CLEAN_ALL="false"
+
+	for arg in "$@"; do
+		case $arg in
+			--help|-h|-\?)
+				SHOW_HELP="true"
+			;;
+			--update)
+				ONLY_UPDATE="true"
+				echo "[ Warning ] --update is not implemented yet"
+			;;
+			--firejail=*)
+				FIREJAIL_VERSION="${arg#*=}"
+				echo "[ Warning ] --firejail is not implemented yet"
+			;;
+			--clean)
+				CLEAN="true"
+				echo "[ Warning ] --clean is not implemented yet"
+			;;
+			--clean-all)
+				CLEAN="true"
+				CLEAN_ALL="true"
+				echo "[ Warning ] --clean-all is not implemented yet"
+			;;
+			--)
+				break
+			;;
+			--*|-?)
+				echo "[ Warning ] unknow commandline argument: $arg"
+			;;
+			*)
+				TBB_PATH="$arg"
+			;;
+		esac
+	done
+
+	if [ "$SHOW_HELP" == "true" ]; then
+		usage
+		exit
+	fi
+	if [ ! -v TBB_PATH ]; then
+		echo "[ Error ] <PATH_TO_TOR_BROWSER_ARCHIV> not given"
+		usage
+		exit 1
+	fi
+}
+
 function main {
+	parse_arguments "$@"
 	prepare_filesystem
-	extract "$1"
+	extract "$TBB_PATH"
 	download
 	fix_disable-programs
 }
