@@ -34,6 +34,8 @@ include globals.local
 
 ignore noexec ${HOME}
 
+noblacklist ${HOME}/.firejailed-tor-browser
+
 blacklist /opt
 blacklist /srv
 blacklist /usr/games

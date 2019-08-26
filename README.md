@@ -1,4 +1,4 @@
-# HOWTO: Firejailed Tor Browser #
+# HOWTO: Firejailed Tor Browser
 
   * Install [firejail](https://firejail.wordpress.com/) ([repo](https://github.com/netblue30/firejail)) lastet git.
   * Download the [Tor Browser](https://www.torproject.org/download/)  
@@ -18,7 +18,8 @@
     ```bash
     $ wget -O - https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master/firejailed-tor-browser.desktop | sed "s,HOME,${HOME},g" > ${HOME}/.local/share/applications/firejailed-tor-browser.desktop
     ```
-  * Now you can start the Tor Browser from your Desktop Environment or by running `firejail --profile=firejailed-tor-browser $HOME/.firejailed-tor-browser/Browser/start-tor-browser`.
+    * Add `blacklist ${HOME}/.firejailed-tor-browser` to `$HOME/.config/firejail/disable-programs.inc`
+  * Now you can start the Tor Browser from your Desktop Environment or by running `firejail --profile=firejailed-tor-browser "$HOME/Browser/start-tor-browser"`.
 
 --------------------
 

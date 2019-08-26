@@ -46,6 +46,10 @@ function download {
 	return 1
 }
 
+function fix_disable-programs {
+	echo 'blacklist ${HOME}/.firejailed-tor-browser' >> "${HOME}/.config/firejail/disbale-programs.local"
+}
+
 function extract {
 	tar -C "${HOME}/.firejailed-tor-browser" --strip 1 -xJf "$1"
 }
@@ -65,6 +69,7 @@ function main {
 	prepare_filesystem
 	extract "$1"
 	download
+	fix_disable-programs
 }
 
 main "$@"
