@@ -28,16 +28,21 @@ DESKTOP_FILE="firejailed-tor-browser.desktop"
 
 function backup_file {
 	[ ! -e "$1" ] || mv "$1" "$1.bak-$(date --iso-8601=seconds)"
+	echo "[ Ok ] backup of $1 created"
 }
 
 function download_with_wget {
 	wget -O - "${BASE_URL}/${FJ_PROFILE}" 2>/dev/null > "${HOME}/.config/firejail/${FJ_PROFILE}"
+	echo "[ Ok ] firejail profile for firejailed-tor-browser downloaded"
 	wget -O - "${BASE_URL}/${DESKTOP_FILE}" 2>/dev/null | sed "s,HOME,${HOME},g" > "${HOME}/.local/share/applications/${DESKTOP_FILE}"
+	echo "[ Ok ] firejailed-tor-browser.desktop downloaded"
 }
 
 function download_with_curl {
 	curl "${BASE_URL}/${FJ_PROFILE}" 2>/dev/null > "${HOME}/.config/firejail/${FJ_PROFILE}"
+	echo "[ Ok ] firejail profile for firejailed-tor-browser downloaded"
 	curl "${BASE_URL}/${DESKTOP_FILE}" 2>/dev/null | sed "s,HOME,${HOME},g" > "${HOME}/.local/share/applications/${DESKTOP_FILE}"
+	echo "[ Ok ] firejailed-tor-browser.desktop downloaded"
 }
 
 function download {
@@ -48,10 +53,13 @@ function download {
 
 function fix_disable-programs {
 	echo 'blacklist ${HOME}/.firejailed-tor-browser' >> "${HOME}/.config/firejail/disbale-programs.local"
+	echo "[ Ok ] disbale-programs fixed"
 }
 
 function extract {
+	echo "[ Info ] extracting the tor-browser ..."
 	tar -C "${HOME}/.firejailed-tor-browser" --strip 1 -xJf "$1"
+	echo "[ Ok ] tor-browser extracted"
 }
 
 function prepare_filesystem {
@@ -63,6 +71,8 @@ function prepare_filesystem {
 
 	mkdir -v -p "${HOME}/.local/share/applications"
 	backup_file "${HOME}/.local/share/applications/${DESKTOP_FILE}"
+
+	echo "[ Ok ] filesystem prepared"
 }
 
 function main {
@@ -73,3 +83,5 @@ function main {
 }
 
 main "$@"
+echo "[ Ok ] Done! The installation was successful, you can now launch the tor-browser by running"
+echo "[ Ok ]   'firejail --profile=firejailed-tor-browser \"\$HOME/Browser/start-tor-browser\"'."
