@@ -138,6 +138,10 @@ function parse_arguments {
 		usage
 		exit 1
 	fi
+	if [ ! -r "$TBB_PATH" ]; then
+		echo "[ Error ] $TBB_PATH does not exist or is not readable"
+		exit 1
+	fi
 }
 
 function main {
@@ -149,5 +153,5 @@ function main {
 }
 
 main "$@"
-echo "[ Ok ] Done! The installation was successful, you can now launch the tor-browser by running"
-echo "[ Ok ]   'firejail --profile=firejailed-tor-browser \"\$HOME/Browser/start-tor-browser\"'."
+echo "[ Ok ] Done! The installation was successful, you can now launch the tor-browser by running:"
+echo "[ Ok ]   firejail --profile=firejailed-tor-browser \"\$HOME/Browser/start-tor-browser\""
