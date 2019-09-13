@@ -54,6 +54,12 @@ function download {
 }
 
 function fix_disable-programs {
+	if [ -v FIREJAIL_VERSION ] && [ "$FIREJAIL_VERSION" != "0.9.60" ]; then
+		echo "[ Warning ] fixing disbale-programs is only supported for firejail 0.9.60 and newer."
+		echo "[ Info ] to fix disable-programs, execute the following as root if you know what it does:"
+		echo "[ Info ]     sh -c 'echo \${HOME}/.firejailed-tor-browser' >> /etc/firejail/disable-programs.local'"
+		return
+	fi
 	echo 'blacklist ${HOME}/.firejailed-tor-browser' >> "${HOME}/.config/firejail/disbale-programs.local"
 	echo "[ Ok ] disbale-programs fixed"
 }
@@ -84,7 +90,8 @@ function usage {
 	echo " OPTIONS:"
 	echo "    --help,-h,-?        Show this help and exit."
 	echo "    --update            Not implemented yet."
-	echo "    --firejail=VERSION  Not implemented yet."
+	echo "    --firejail=VERSION  Install files for a older firejail version."
+	echo "                        Supported version: 0.9.60, 0.9.58"
 	echo "    --clean             Not implemented yet."
 	echo "    --clean-all         Not implemented yet."
 }
@@ -106,7 +113,6 @@ function parse_arguments {
 			;;
 			--firejail=*)
 				FIREJAIL_VERSION="${arg#*=}"
-				echo "[ Warning ] --firejail is not implemented yet"
 			;;
 			--clean)
 				CLEAN="true"
@@ -141,6 +147,12 @@ function parse_arguments {
 	if [ ! -r "$TBB_PATH" ]; then
 		echo "[ Error ] $TBB_PATH does not exist or is not readable"
 		exit 1
+	if [ -v FIREJAIL_VERSION ]; then
+		if [ "$FIREJAIL_VERSION" != "0.9.60" ] && [ "$FIREJAIL_VERSION" != "0.9.58" ]; then
+			echo "[ Error ] not supported firejail version: $FIREJAIL_VERSION"
+			exit 1
+		fi
+		BASE_URL="$BASE_URL/stable-profiles/$FIREJAIL_VERSION"
 	fi
 }
 

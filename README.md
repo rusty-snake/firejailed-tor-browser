@@ -1,6 +1,7 @@
 # HOWTO: Firejailed Tor Browser
 
-  * Install [firejail](https://firejail.wordpress.com/) ([repo](https://github.com/netblue30/firejail)) lastet git.
+  * Install [firejail](https://firejail.wordpress.com/) ([repo](https://github.com/netblue30/firejail)) lastet git or, if you are using a stable firejail release,
+    have a look at [stable-profiles](stable-profiles).
   * Download the [Tor Browser](https://www.torproject.org/download/)  
   * Verify the signatur as descripted [here](https://support.torproject.org/#how-to-verify-signature).
   * Execute the `install.sh` script in a terminal:
