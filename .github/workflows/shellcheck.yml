@@ -1,6 +1,6 @@
 name: ShellCheck
 
-on: [push]
+on: push
 
 jobs:
   build:
