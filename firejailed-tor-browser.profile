@@ -51,6 +51,11 @@ include disable-programs.inc
 include disable-xdg.inc
 
 whitelist ${HOME}/.firejailed-tor-browser
+whitelist /usr/share/Modules
+whitelist /usr/share/tcl8.6
+whitelist /usr/share/misc
+# /usr/share/icons is not strictly necessary, you can safely nowhitelist it
+whitelist /usr/share/icons
 # Add the next line to firejailed-tor-browser.local to enable better desktop integration
 #include whitelist-common.inc
 include whitelist-var-common.inc
