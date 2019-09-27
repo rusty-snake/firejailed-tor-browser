@@ -60,7 +60,7 @@ function fix_disable-programs {
 		echo "[ Info ]     sh -c 'echo \${HOME}/.firejailed-tor-browser' >> /etc/firejail/disable-programs.local'"
 		return
 	fi
-	echo 'blacklist ${HOME}/.firejailed-tor-browser' >> "${HOME}/.config/firejail/disbale-programs.local"
+	echo "blacklist \${HOME}/.firejailed-tor-browser" >> "${HOME}/.config/firejail/disbale-programs.local"
 	echo "[ Ok ] disbale-programs fixed"
 }
 
