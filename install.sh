@@ -147,6 +147,7 @@ function parse_arguments {
 	if [ ! -r "$TBB_PATH" ]; then
 		echo "[ Error ] $TBB_PATH does not exist or is not readable"
 		exit 1
+	fi
 	if [ -v FIREJAIL_VERSION ]; then
 		if [ "$FIREJAIL_VERSION" != "0.9.60" ] && [ "$FIREJAIL_VERSION" != "0.9.58" ]; then
 			echo "[ Error ] not supported firejail version: $FIREJAIL_VERSION"
