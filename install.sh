@@ -57,11 +57,13 @@ function fix_disable-programs {
 	if [ -v FIREJAIL_VERSION ] && [ "$FIREJAIL_VERSION" != "0.9.60" ]; then
 		echo "[ Warning ] fixing disbale-programs is only supported for firejail 0.9.60 and newer."
 		echo "[ Info ] to fix disable-programs, execute the following as root if you know what it does:"
-		echo "[ Info ]     sh -c 'echo \${HOME}/.firejailed-tor-browser' >> /etc/firejail/disable-programs.local'"
+		echo "[ Info ]     sh -c 'echo \${HOME}/.firejailed-tor-browser' >> /etc/firejail/disable-programs.local"
 		return
 	fi
-	echo 'blacklist ${HOME}/.firejailed-tor-browser' >> "${HOME}/.config/firejail/disbale-programs.local"
-	echo "[ Ok ] disbale-programs fixed"
+	if ! grep --quiet "blacklist \${HOME}/.firejailed-tor-browser" "${HOME}/.config/firejail/disbale-programs.local"; then
+		echo 'blacklist ${HOME}/.firejailed-tor-browser' >> "${HOME}/.config/firejail/disbale-programs.local"
+		echo "[ Ok ] disbale-programs fixed"
+	fi
 }
 
 function extract {
