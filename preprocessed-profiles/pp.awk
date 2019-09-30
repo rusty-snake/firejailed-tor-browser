@@ -21,11 +21,36 @@
 # SOFTWARE.
 
 BEGIN {
-	PRIVATE = "YES"
-	for (arg in ARGV) {
-		if (ARGV[arg] ~ /^PRIVATE=(YES|NO)$/) {
-			PRIVATE = substr(ARGV[arg], 9)
+	while ((getline < "pp.awk.conditions") > 0) {
+		if ($1 == "#") { continue }
+		if (NF > 2) {
+			print "To much rows" > "/dev/stderr"
+			exit 1
 		}
+		if ($1 !~ /^[A-Za-z][0-9A-Za-z]+$/) {
+			print "Invalid character in condition" > "/dev/stderr"
+			exit 1
+		}
+		if (toupper($2) ~ /(YES|TRUE|1)/) {
+			conditions[$1] = 1
+		} else { if (toupper($2) ~ /(NO|FALSE|0)/) {
+			conditions[$1] = 0
+		} else {
+			print "Invalid value" > "/dev/stderr"
+			exit 1
+		}}
+	} close("pp.awk.conditions")
+	for (arg in ARGV) {
+		print ARGV[arg] > "/dev/stderr"
+		if (toupper(ARGV[arg]) ~ /^[A-Z][0-9A-Z]+=(YES|TRUE|1)$/) {
+			conditions[gensub(/=.*/, "", 1, ARGV[arg])] = 1
+		} else { if (toupper(ARGV[arg]) ~ /^[A-Z][0-9A-Z]+=(NO|FALSE|0)$/) {
+			conditions[gensub(/=.*/, "", 1, ARGV[arg])] = 0
+		} else {
+			if (ARGV[arg] == "awk") { continue }
+			print "Invalid conditions/value" > "/dev/stderr"
+			exit 1
+		}}
 		ARGV[arg] = ""
 	}
 	include_line = 1
@@ -34,15 +59,12 @@ BEGIN {
 	match($0, /:(if|fi)(:|;)/)
 	switch (substr($0, RSTART, RLENGTH))  {
 		case ":if:":
-			switch (substr($0, RSTART + RLENGTH + 1)) {
-				case "PRIVATE":
-					if (PRIVATE == "NO") {
-						include_line = 0
-					}
-					break
-				default:
-					print "Unknow condition" > "/dev/stderr"
-					exit 1
+			con = substr($0, RSTART + RLENGTH + 1)
+			if (con in conditions) {
+				include_line = conditions[con]
+			} else {
+				print "Unknow condition" > "/dev/stderr"
+				exit 1
 			}
 			break
 		case ":fi;":
@@ -60,5 +82,8 @@ BEGIN {
 }
 # TODOs
 # - nesting (or deny nesting)
-# - else
-# - not
+# - error exit codes
+#:else;
+#:ifn: CON
+#:elif: CON
+#:elifn: CON

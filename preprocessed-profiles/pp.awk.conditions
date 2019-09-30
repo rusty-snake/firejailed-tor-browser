@@ -1,0 +1,2 @@
+# Use a private $HOME (FJ: --private=<DIR>)
+PRIVATE yes

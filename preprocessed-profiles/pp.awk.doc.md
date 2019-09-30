@@ -34,9 +34,22 @@ If a command is unknown, the program aborts.
 Conditions
 ----------
 
- - PRIVATE (default: YES): use 'private' in the profile.
+Conditions are used by `if`, they are set on the commandline or in pp.awk.conditions.
 
-If a condition is unknown, the program aborts.
+Conditions may contain numbers, upper and lower case letters but
+must begin with one letter. The assigned value of a Contition is
+1/YES/TRUE or 0/NO/FALSE (case insensitive).
+
+Conditions passed on the command line override the conditions specified in pp.awk.conditions.
+Usage on the commandline: `./pp.awk CON1=VAL CON2=VAL`.
+
+pp.awk.conditions sets the default conditions/values. The format is the following:
+
+    # I'm a comment, because I start with "# " (note the space).
+    CON1 VAL
+    CON2 VAL
+
+If a unknown conditions is used, the program aborts.
 
 Examples
 --------
