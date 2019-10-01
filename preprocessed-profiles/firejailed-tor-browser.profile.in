@@ -85,6 +85,8 @@ shell none
 disable-mnt
 #:if: PRIVATE
 private ${HOME}/.firejailed-tor-browser
+#:else;
+private-cwd ${HOME}/.firejailed-tor-browser
 #:fi;
 # These are the minimum required programms to start the TBB,
 # you maybe need to add one or more programs from the commented private-bin line below.

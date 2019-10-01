@@ -54,15 +54,30 @@ BEGIN {
 		ARGV[arg] = ""
 	}
 	include_line = 1
+	forward2fi = 0
 }
 /^#:.*/ {
-	match($0, /:(if|fi)(:|;)/)
+	match($0, /:(if|else|fi)(:|;)/)
 	switch (substr($0, RSTART, RLENGTH))  {
 		case ":if:":
-			include_line = conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]
+			if (conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]) {
+				include_line = 1
+				forward2fi = 1
+			} else {
+				include_line = 0
+			}
+			break
+		case ":else;":
+			if (forward2fi == 0) {
+				include_line = 1
+				forward2fi = 1
+			} else {
+				include_line = 0
+			}
 			break
 		case ":fi;":
 			include_line = 1
+			forward2fi = 0
 			break
 		default:
 			print "Unknow command" > "/dev/stderr"
@@ -74,7 +89,6 @@ BEGIN {
 		print
 	}
 }
-
 function ckcon(con) {
 	if (con in conditions == 0) {
 		print "Unknow condition" > "/dev/stderr"
@@ -85,7 +99,6 @@ function ckcon(con) {
 # TODOs
 # - nesting (or deny nesting)
 # - error exit codes
-#:else;
 #:ifn: CON
 #:elif: CON
 #:elifn: CON
