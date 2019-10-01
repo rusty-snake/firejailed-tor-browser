@@ -59,13 +59,7 @@ BEGIN {
 	match($0, /:(if|fi)(:|;)/)
 	switch (substr($0, RSTART, RLENGTH))  {
 		case ":if:":
-			con = substr($0, RSTART + RLENGTH + 1)
-			if (con in conditions) {
-				include_line = conditions[con]
-			} else {
-				print "Unknow condition" > "/dev/stderr"
-				exit 1
-			}
+			include_line = conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]
 			break
 		case ":fi;":
 			include_line = 1
@@ -79,6 +73,14 @@ BEGIN {
 	if (include_line) {
 		print
 	}
+}
+
+function ckcon(con) {
+	if (con in conditions == 0) {
+		print "Unknow condition" > "/dev/stderr"
+		exit 1
+	}
+	return con
 }
 # TODOs
 # - nesting (or deny nesting)
