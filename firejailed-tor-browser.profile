@@ -53,6 +53,7 @@ include disable-xdg.inc
 whitelist ${HOME}/.firejailed-tor-browser
 # Add the next line to firejailed-tor-browser.local to enable better desktop integration
 #include whitelist-common.inc
+include whitelist-usr-share-common.inc
 include whitelist-var-common.inc
 
 apparmor
