@@ -27,6 +27,7 @@ Commands
 --------
 
  - `if: CONDITION` all following lines until `fi;` are only in the output file included if CONDITION is YES.
+ - `else;` if CONDITION from the previous `if` was NO, include the lines from here, otherwise not include these lines.
  - `fi;` end of `if`
 
 If a command is unknown, the program aborts.
