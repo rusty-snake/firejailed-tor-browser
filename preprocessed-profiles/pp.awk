@@ -41,7 +41,6 @@ BEGIN {
 		}}
 	} close("pp.awk.conditions")
 	for (arg in ARGV) {
-		print ARGV[arg] > "/dev/stderr"
 		if (toupper(ARGV[arg]) ~ /^[A-Z][0-9A-Z]+=(YES|TRUE|1)$/) {
 			conditions[gensub(/=.*/, "", 1, ARGV[arg])] = 1
 		} else { if (toupper(ARGV[arg]) ~ /^[A-Z][0-9A-Z]+=(NO|FALSE|0)$/) {
