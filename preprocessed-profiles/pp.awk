@@ -54,19 +54,29 @@ BEGIN {
 	}
 	include_line = 1
 	forward2fi = 0
+	conditional_context = 0
 }
 /^#:.*/ {
 	match($0, /:(if|else|fi)(:|;)/)
 	switch (substr($0, RSTART, RLENGTH))  {
 		case ":if:":
+			if (conditional_context == 1) {
+				print "Nesting isn't allowed" > "/dev/stderr"
+				exit 1
+			}
 			if (conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]) {
 				include_line = 1
 				forward2fi = 1
 			} else {
 				include_line = 0
 			}
+			conditional_context = 1
 			break
 		case ":else;":
+			if (conditional_context == 0) {
+				print "No conditional_context" > "/dev/stderr"
+				exit 1
+			}
 			if (forward2fi == 0) {
 				include_line = 1
 				forward2fi = 1
@@ -75,8 +85,13 @@ BEGIN {
 			}
 			break
 		case ":fi;":
+			if (conditional_context == 0) {
+				print "No conditional_context" > "/dev/stderr"
+				exit 1
+			}
 			include_line = 1
 			forward2fi = 0
+			conditional_context = 0
 			break
 		default:
 			print "Unknow command" > "/dev/stderr"
@@ -96,8 +111,6 @@ function ckcon(con) {
 	return con
 }
 # TODOs
-# - nesting (or deny nesting)
-# - error exit codes
 #:ifn: CON
 #:elif: CON
 #:elifn: CON
