@@ -77,7 +77,7 @@ notv
 nou2f
 novideo
 protocol unix,inet,inet6
-seccomp !chroot
+seccomp !chroot,@aio,@keyring,@memlock,@mount,@setuid,@timer
 seccomp.block-secondary
 shell none
 # Cause some issues
