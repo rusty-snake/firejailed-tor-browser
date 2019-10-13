@@ -22,6 +22,10 @@
       $ echo 'blacklist ${HOME}/.firejailed-tor-browser' >> "${HOME}/.config/firejail/disbale-programs.local"
       ```
   * Now you can start the Tor Browser from your Desktop Environment or by running `firejail --profile=firejailed-tor-browser "$HOME/Browser/start-tor-browser"`.
+  * Additional you can restrict the aviable interfaces with the `net` command.
+    * List all interfaces: `ip addr show` or `ifconfig`
+    * Add the interface with your internet connection to `firejailed-tor-browser.local`
+    * Example: `echo 'net wlan0' >> "${HOME}/.config/firejail/firejailed-tor-browser.local"`
 
 --------------------
 
