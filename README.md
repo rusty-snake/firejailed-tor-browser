@@ -1,5 +1,7 @@
 # HOWTO: Firejailed Tor Browser
 
+![](https://github.com/rusty-snake/firejailed-tor-browser/workflows/ShellCheck/badge.svg)
+
   * Install [firejail](https://firejail.wordpress.com/) ([repo](https://github.com/netblue30/firejail)) lastet git or, if you are using a stable firejail release,
     have a look at [stable-profiles](stable-profiles).
   * Download the [Tor Browser](https://www.torproject.org/download/)  
