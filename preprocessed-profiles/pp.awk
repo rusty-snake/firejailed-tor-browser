@@ -55,6 +55,7 @@ BEGIN {
 	include_line = 1
 	forward2fi = 0
 	conditional_context = 0
+	in_else = 0
 }
 /^#:.*/ {
 	match($0, /:(if|elif|else|fi)(:|;)/)
@@ -85,6 +86,11 @@ BEGIN {
 			break
 		case ":else;":
 			check_concon()
+			if in_else {
+				print "Nesting isn't allowed" > "/dev/stderr"
+                                exit 1
+			}
+			in_else = 1
 			if (forward2fi == 0) {
 				include_line = 1
 				forward2fi = 1
@@ -97,6 +103,7 @@ BEGIN {
 			include_line = 1
 			forward2fi = 0
 			conditional_context = 0
+			in_else = 0
 			break
 		default:
 			print "Unknow command" > "/dev/stderr"
