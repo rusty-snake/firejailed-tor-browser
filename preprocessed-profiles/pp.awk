@@ -57,7 +57,7 @@ BEGIN {
 	conditional_context = 0
 }
 /^#:.*/ {
-	match($0, /:(if|else|fi)(:|;)/)
+	match($0, /:(if|elif|else|fi)(:|;)/)
 	switch (substr($0, RSTART, RLENGTH))  {
 		case ":if:":
 			if (conditional_context == 1) {
@@ -71,6 +71,17 @@ BEGIN {
 				include_line = 0
 			}
 			conditional_context = 1
+			break
+		case ":elif:":
+			check_concon()
+			if (forward2fi) {
+				include_line = 0
+			} else { if (conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]) {
+				include_line = 1
+				forward2fi = 1
+			} else {
+				include_line = 0
+			}}
 			break
 		case ":else;":
 			check_concon()
@@ -112,5 +123,4 @@ function check_concon() {
 }
 # TODOs
 #:ifn: CON
-#:elif: CON
 #:elifn: CON

@@ -27,6 +27,7 @@ Commands
 --------
 
  - `if: CONDITION` all following lines until `fi;` are only in the output file included if CONDITION is YES.
+ - `elif: CONDITION` the next lines will be included, if no previous `if`/`elif` was true and CONDITION is true.
  - `else;` if CONDITION from the previous `if` was NO, include the lines from here, otherwise not include these lines.
  - `fi;` end of `if`
 
