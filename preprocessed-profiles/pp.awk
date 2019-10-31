@@ -73,10 +73,7 @@ BEGIN {
 			conditional_context = 1
 			break
 		case ":else;":
-			if (conditional_context == 0) {
-				print "No conditional_context" > "/dev/stderr"
-				exit 1
-			}
+			check_concon()
 			if (forward2fi == 0) {
 				include_line = 1
 				forward2fi = 1
@@ -85,10 +82,7 @@ BEGIN {
 			}
 			break
 		case ":fi;":
-			if (conditional_context == 0) {
-				print "No conditional_context" > "/dev/stderr"
-				exit 1
-			}
+			check_concon()
 			include_line = 1
 			forward2fi = 0
 			conditional_context = 0
@@ -109,6 +103,12 @@ function ckcon(con) {
 		exit 1
 	}
 	return con
+}
+function check_concon() {
+	if (conditional_context == 0) {
+		print "No conditional_context" > "/dev/stderr"
+		exit 1
+	}
 }
 # TODOs
 #:ifn: CON
