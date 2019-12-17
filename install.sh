@@ -67,14 +67,17 @@ function fix_disable-programs {
 }
 
 function extract {
+	$ONLY_UPDATE && echo "[ Info ] Skiping extracting of the tor-browser" ; return
 	echo "[ Info ] extracting the tor-browser ..."
 	tar -C "${HOME}/.firejailed-tor-browser" --strip 1 -xJf "$1"
 	echo "[ Ok ] tor-browser extracted"
 }
 
 function prepare_filesystem {
-	backup_file "${HOME}/.firejailed-tor-browser"
-	mkdir "${HOME}/.firejailed-tor-browser"
+	if [ ! $ONLY_UPDATE ]; then
+		backup_file "${HOME}/.firejailed-tor-browser"
+		mkdir "${HOME}/.firejailed-tor-browser"
+	fi
 
 	mkdir -v -p "${HOME}/.config/firejail"
 	backup_file "${HOME}/.config/firejail/${FJ_PROFILE}"
@@ -91,7 +94,7 @@ function usage {
 	echo ""
 	echo " OPTIONS:"
 	echo "    --help,-h,-?        Show this help and exit."
-	echo "    --update            Not implemented yet."
+	echo "    --update            Update only the firejail profile and the .desktop file."
 	echo "    --firejail=VERSION  Install files for a older firejail version."
 	echo "                        Supported version: 0.9.60, 0.9.58"
 	echo "    --clean             Not implemented yet."
@@ -111,7 +114,6 @@ function parse_arguments {
 			;;
 			--update)
 				ONLY_UPDATE="true"
-				echo "[ Warning ] --update is not implemented yet"
 			;;
 			--firejail=*)
 				FIREJAIL_VERSION="${arg#*=}"
@@ -141,12 +143,12 @@ function parse_arguments {
 		usage
 		exit
 	fi
-	if [ ! -v TBB_PATH ]; then
+	if [ ! -v TBB_PATH ] && [ "$ONLY_UPDATE" == "false" ]; then
 		echo "[ Error ] <PATH_TO_TOR_BROWSER_ARCHIV> not given"
 		usage
 		exit 1
 	fi
-	if [ ! -r "$TBB_PATH" ]; then
+	if [ ! -r "$TBB_PATH" ] && [ "$ONLY_UPDATE" == "false" ]; then
 		echo "[ Error ] $TBB_PATH does not exist or is not readable"
 		exit 1
 	fi
