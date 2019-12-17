@@ -50,6 +50,7 @@ include disable-passwdmgr.inc
 include disable-programs.inc
 include disable-xdg.inc
 
+whitelist ${RUNUSER}/pulse
 whitelist ${HOME}/.firejailed-tor-browser
 # Add the next line to firejailed-tor-browser.local to enable better desktop integration
 #include whitelist-common.inc
