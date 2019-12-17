@@ -55,6 +55,7 @@ include disable-xdg.inc
 whitelist ${HOME}/.firejailed-tor-browser
 whitelist /usr/share/alsa
 whitelist /usr/share/applications
+whitelist /usr/share/ca-certificates
 whitelist /usr/share/crypto-policies
 whitelist /usr/share/cursors
 whitelist /usr/share/dconf
@@ -64,6 +65,7 @@ whitelist /usr/share/enchant
 whitelist /usr/share/enchant-2
 whitelist /usr/share/fontconfig
 whitelist /usr/share/fonts
+whitelist /usr/share/gir-1.0
 whitelist /usr/share/gjs-1.0
 whitelist /usr/share/glib-2.0
 whitelist /usr/share/glvnd
@@ -78,6 +80,7 @@ whitelist /usr/share/knotifications5
 whitelist /usr/share/kservices5
 whitelist /usr/share/Kvantum
 whitelist /usr/share/kxmlgui5
+whitelist /usr/share/libdrm
 whitelist /usr/share/libthai
 whitelist /usr/share/locale
 whitelist /usr/share/mime
@@ -88,6 +91,8 @@ whitelist /usr/share/p11-kit
 whitelist /usr/share/pixmaps
 whitelist /usr/share/pki
 whitelist /usr/share/plasma
+whitelist /usr/share/qt
+whitelist /usr/share/qt4
 whitelist /usr/share/qt5
 whitelist /usr/share/sounds
 whitelist /usr/share/tcl8.6
