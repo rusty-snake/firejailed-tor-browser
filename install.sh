@@ -61,6 +61,7 @@ function fix_disable-programs {
 		return
 	fi
 	if ! grep --quiet "blacklist \${HOME}/.firejailed-tor-browser" "${HOME}/.config/firejail/disbale-programs.local"; then
+		# shellcheck disable=SC2016
 		echo 'blacklist ${HOME}/.firejailed-tor-browser' >> "${HOME}/.config/firejail/disbale-programs.local"
 		echo "[ Ok ] disbale-programs fixed"
 	fi
