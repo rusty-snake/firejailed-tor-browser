@@ -41,6 +41,7 @@ blacklist /srv
 blacklist /usr/games
 blacklist /usr/local
 blacklist /usr/src
+blacklist /var
 
 include disable-common.inc
 include disable-devel.inc
