@@ -68,14 +68,14 @@ function fix_disable-programs {
 }
 
 function extract {
-	$ONLY_UPDATE && echo "[ Info ] Skiping extracting of the tor-browser" ; return
+	$ONLY_UPDATE && (echo "[ Info ] Skiping extracting of the tor-browser" ; return)
 	echo "[ Info ] extracting the tor-browser ..."
 	tar -C "${HOME}/.firejailed-tor-browser" --strip 1 -xJf "$1"
 	echo "[ Ok ] tor-browser extracted"
 }
 
 function prepare_filesystem {
-	if [ ! $ONLY_UPDATE ]; then
+	if ! $ONLY_UPDATE; then
 		backup_file "${HOME}/.firejailed-tor-browser"
 		mkdir "${HOME}/.firejailed-tor-browser"
 	fi
