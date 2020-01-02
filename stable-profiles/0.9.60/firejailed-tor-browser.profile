@@ -1,4 +1,4 @@
-# Copyright (c) 2019 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
+# Copyright (c) 2019,2020 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -45,6 +45,7 @@ blacklist /srv
 blacklist /usr/games
 blacklist /usr/local
 blacklist /usr/src
+blacklist /var
 
 include disable-common.inc
 include disable-devel.inc
@@ -130,7 +131,7 @@ nou2f
 novideo
 protocol unix,inet,inet6
 # @default-nodebuggers without chroot
-seccomp.drop @clock,@cpu-emulation,@debug,@module,@obsolete,@raw-io,@reboot,@resources,@swap,acct,add_key,bpf,fanotify_init,io_cancel,io_destroy,io_getevents,io_setup,io_submit,ioprio_set,kcmp,keyctl,mount,name_to_handle_at,nfsservctl,ni_syscall,open_by_handle_at,personality,pivot_root,process_vm_readv,ptrace,remap_file_pages,request_key,setdomainname,sethostname,syslog,umount,umount2,userfaultfd,vhangup,vmsplice
+seccomp.drop @clock,@cpu-emulation,@debug,@module,@obsolete,@raw-io,@reboot,@resources,@swap,acct,add_key,alarm,bpf,fanotify_init,getitimer,idle,io_cancel,io_destroy,io_getevents,io_pgetevents,io_setup,io_submit,ioprio_set,kcmp,keyctl,mlock,mlock2,mlockall,mount,munlock,munlockall,name_to_handle_at,nfsservctl,ni_syscall,open_by_handle_at,personality,pivot_root,process_vm_readv,ptrace,remap_file_pages,request_key,setdomainname,setgid,setgid32,setgroups,setgroups32,sethostname,setitimer,setregid,setregid32,setresgid,setresgid32,setresuid,setresuid32,setreuid,setreuid32,setuid,setuid32,syslog,timer_create,timer_delete,timer_getoverrun,timer_gettime,timer_settime,timerfd_create,timerfd_gettime,timerfd_settime,times,umount,umount2,userfaultfd,vhangup,vmsplice
 seccomp.block-secondary
 shell none
 # Cause some issues
