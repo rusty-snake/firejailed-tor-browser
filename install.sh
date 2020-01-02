@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2019 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
+# Copyright (c) 2019,2020 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -97,7 +97,7 @@ function usage {
 	echo "    --help,-h,-?        Show this help and exit."
 	echo "    --update            Update only the firejail profile and the .desktop file."
 	echo "    --firejail=VERSION  Install files for a older firejail version."
-	echo "                        Supported version: 0.9.60, 0.9.58"
+	echo "                        Supported version: 0.9.62, 0.9.60, 0.9.58"
 	echo "    --clean             Not implemented yet."
 	echo "    --clean-all         Not implemented yet."
 }
@@ -154,7 +154,7 @@ function parse_arguments {
 		exit 1
 	fi
 	if [ -v FIREJAIL_VERSION ]; then
-		if [ "$FIREJAIL_VERSION" != "0.9.60" ] && [ "$FIREJAIL_VERSION" != "0.9.58" ]; then
+		if [ "$FIREJAIL_VERSION" != "0.9.60" ] && [ "$FIREJAIL_VERSION" != "0.9.58" ] && [ "$FIREJAIL_VERSION" != "0.9.62" ]; then
 			echo "[ Error ] not supported firejail version: $FIREJAIL_VERSION"
 			exit 1
 		fi
