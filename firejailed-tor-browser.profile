@@ -1,4 +1,4 @@
-# Copyright (c) 2019 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
+# Copyright (c) 2019,2020 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -79,7 +79,7 @@ notv
 nou2f
 novideo
 protocol unix,inet,inet6
-seccomp !chroot,@aio,@keyring,@memlock,@mount,@setuid,@timer
+seccomp !chroot,@memlock,@setuid,@timer,io_pgetevents
 seccomp.block-secondary
 shell none
 # Cause some issues
