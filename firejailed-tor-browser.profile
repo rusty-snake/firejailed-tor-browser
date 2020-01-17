@@ -100,6 +100,9 @@ private-dev
 # To get ideas what maybe needs to be added look at the templates:
 # https://github.com/netblue30/firejail/blob/28142bbc49ecc3246033cbc810d7f04027c87f4d/etc/templates/profile.template#L151-L162
 private-etc machine-id
+# On Arch you maybe need to uncomment the following (or add to your firejailed-tor-browser.local).
+# See https://github.com/netblue30/firejail/issues/3158
+#private-etc ld.so.cache,ld.so.conf,ld.so.conf.d,ld.so.preload
 # Experimental
 #private-lib libX11-xcb.so.1,libXt.so.6
 private-tmp
