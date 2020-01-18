@@ -144,12 +144,12 @@ fix_disable-programs()
     return
   fi
 
-  # Make sure ${HOME}/.config/firejail/disbale-programs.local exists.
-  touch "${HOME}/.config/firejail/disbale-programs.local"
+  # Make sure ${HOME}/.config/firejail/disable-programs.local exists.
+  touch "${HOME}/.config/firejail/disable-programs.local"
 
   # Add 'blacklist ${HOME}/.firejailed-tor-browser' to disable-programs.inc unless it's present.
-  if ! grep --quiet "blacklist \${HOME}/.firejailed-tor-browser" "${HOME}/.config/firejail/disbale-programs.local"; then
-    echo "blacklist \${HOME}/.firejailed-tor-browser" >> "${HOME}/.config/firejail/disbale-programs.local"
+  if ! grep --quiet "blacklist \${HOME}/.firejailed-tor-browser" "${HOME}/.config/firejail/disable-programs.local"; then
+    echo "blacklist \${HOME}/.firejailed-tor-browser" >> "${HOME}/.config/firejail/disable-programs.local"
     echo "[ Ok ] Fixed disbale-programs.inc."
   fi
 }
