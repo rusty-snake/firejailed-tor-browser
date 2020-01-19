@@ -63,5 +63,6 @@ Copyright © 2019 rusty-snake
 Credits
 -------
 
-The sections 'What does "contributing" mean?' and 'Why should I contribute?' are based on [write-file](https://github.com/tunnckoCore/write-file)s CONTRIBUTIN.md.
-Copyright © 2016, [Charlike Mike Reagent](http://www.tunnckocore.tk).
+The sections 'What does "contributing" mean?' and 'Why should I contribute?' are based
+on [write-file](https://github.com/tunnckoCore/write-file)s [CONTRIBUTIN.md](https://github.com/tunnckoCore/write-file/blob/master/CONTRIBUTING.md).
+Copyright © 2016, [Charlike Mike Reagent](http://www.tunnckocore.tk) ([CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)).

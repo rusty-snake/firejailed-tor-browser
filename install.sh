@@ -86,6 +86,7 @@ main()
   extract "$TBB_PATH"
   #"$(dirname "$0")"/update.sh
   (
+    # shellcheck source=update.sh
     . "$(dirname "$0")"/update.sh
     parse_arguments "$FIREJAIL_VERSION"
     check_firejail_version

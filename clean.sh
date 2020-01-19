@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2019 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
+# Copyright (c) 2019,2020 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,7 @@ if [ "$1" == "--help" ]; then
 	echo ""
 	echo "If no parameters are passed, only backups are deleted."
 fi
+
 if [ "$1" == "--all" ]; then
 	rm -r -f -v "${HOME}"/.firejailed-tor-browser*
 	rm -r -f -v "${HOME}"/.config/firejail/firejailed-tor-browser.profile*
