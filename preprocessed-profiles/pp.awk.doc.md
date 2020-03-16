@@ -51,7 +51,7 @@ pp.awk.conditions sets the default conditions/values. The format is the followin
     CON1 VAL
     CON2 VAL
 
-If a unknown conditions is used, the program aborts.
+If a unknown conditions (=not set on commandline or in pp.awk.conditions) is used in the input file, the program aborts.
 
 Examples
 --------

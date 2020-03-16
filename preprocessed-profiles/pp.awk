@@ -1,6 +1,6 @@
 #!/usr/bin/awk -E
 
-# Copyright (c) 2019 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
+# Copyright (c) 2019,2020 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 BEGIN {
+	# Parse pp.awk.conditions
 	while ((getline < "pp.awk.conditions") > 0) {
 		if ($1 == "#") { continue }
 		if (NF > 2) {
@@ -33,25 +34,28 @@ BEGIN {
 		}
 		if (toupper($2) ~ /(YES|TRUE|1)/) {
 			conditions[$1] = 1
-		} else { if (toupper($2) ~ /(NO|FALSE|0)/) {
+		} else if (toupper($2) ~ /(NO|FALSE|0)/) {
 			conditions[$1] = 0
 		} else {
 			print "Invalid value" > "/dev/stderr"
 			exit 1
-		}}
+		}
 	} close("pp.awk.conditions")
+
+	# Parse commandline arguments
 	for (arg in ARGV) {
 		if (toupper(ARGV[arg]) ~ /^[A-Z][0-9A-Z]+=(YES|TRUE|1)$/) {
 			conditions[gensub(/=.*/, "", 1, ARGV[arg])] = 1
-		} else { if (toupper(ARGV[arg]) ~ /^[A-Z][0-9A-Z]+=(NO|FALSE|0)$/) {
+		} else if (toupper(ARGV[arg]) ~ /^[A-Z][0-9A-Z]+=(NO|FALSE|0)$/) {
 			conditions[gensub(/=.*/, "", 1, ARGV[arg])] = 0
 		} else {
 			if (ARGV[arg] == "awk") { continue }
 			print "Invalid conditions/value" > "/dev/stderr"
 			exit 1
-		}}
+		}
 		ARGV[arg] = ""
 	}
+
 	include_line = 1
 	forward2fi = 0
 	conditional_context = 0
@@ -77,16 +81,16 @@ BEGIN {
 			check_concon()
 			if (forward2fi) {
 				include_line = 0
-			} else { if (conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]) {
+			} else if (conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]) {
 				include_line = 1
 				forward2fi = 1
 			} else {
 				include_line = 0
-			}}
+			}
 			break
 		case ":else;":
 			check_concon()
-			if in_else {
+			if (in_else) {
 				print "Nesting isn't allowed" > "/dev/stderr"
                                 exit 1
 			}
