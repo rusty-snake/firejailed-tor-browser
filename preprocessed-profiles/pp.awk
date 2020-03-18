@@ -20,25 +20,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+function errexit(msg) {
+	print msg > "/dev/stderr"
+	exit 1
+}
+
+function ckcon(con) {
+	if (con in conditions == 0)
+		errexit("Unknow condition")
+	return con
+}
+
 BEGIN {
 	# Parse pp.awk.conditions
 	while ((getline < "pp.awk.conditions") > 0) {
-		if ($1 == "#") { continue }
-		if (NF > 2) {
-			print "To much rows" > "/dev/stderr"
-			exit 1
-		}
-		if ($1 !~ /^[A-Za-z][0-9A-Za-z]+$/) {
-			print "Invalid character in condition" > "/dev/stderr"
-			exit 1
-		}
-		if (toupper($2) ~ /(YES|TRUE|1)/) {
-			conditions[$1] = 1
-		} else if (toupper($2) ~ /(NO|FALSE|0)/) {
-			conditions[$1] = 0
+		if ($1 == "#")
+			continue
+		if (NF > 2)
+			errexit("To much rows")
+		if ($1 !~ /^[A-Za-z][0-9A-Za-z]+$/)
+			errexit("Invalid character in condition")
+
+		con = $1
+		val = $2
+		if (toupper(val) ~ /(YES|TRUE|1)/) {
+			conditions[con] = 1
+		} else if (toupper(val) ~ /(NO|FALSE|0)/) {
+			conditions[con] = 0
 		} else {
-			print "Invalid value" > "/dev/stderr"
-			exit 1
+			errexit("Invalid value")
 		}
 	} close("pp.awk.conditions")
 
@@ -49,25 +59,23 @@ BEGIN {
 		} else if (toupper(ARGV[arg]) ~ /^[A-Z][0-9A-Z]+=(NO|FALSE|0)$/) {
 			conditions[gensub(/=.*/, "", 1, ARGV[arg])] = 0
 		} else {
-			if (ARGV[arg] == "awk") { continue }
-			print "Invalid conditions/value" > "/dev/stderr"
-			exit 1
+			if (ARGV[arg] == "awk")
+				continue
+			errexit("Invalid commandline argument")
 		}
 		ARGV[arg] = ""
 	}
 
 	include_line = 1
 	forward2fi = 0
-	conditional_context = 0
-	in_else = 0
+	last_cmd = "fi"
 }
 /^#:.*/ {
 	match($0, /:(if|elif|else|fi)(:|;)/)
 	switch (substr($0, RSTART, RLENGTH))  {
 		case ":if:":
-			if (conditional_context == 1) {
-				print "Nesting isn't allowed" > "/dev/stderr"
-				exit 1
+			if (last_cmd != "fi") {
+				errexit("syntax error in line " NR)
 			}
 			if (conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]) {
 				include_line = 1
@@ -75,62 +83,47 @@ BEGIN {
 			} else {
 				include_line = 0
 			}
-			conditional_context = 1
+			last_cmd = "if"
 			break
 		case ":elif:":
-			check_concon()
-			if (forward2fi) {
-				include_line = 0
-			} else if (conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]) {
+			if (last_cmd != "if" && last_cmd != "elif") {
+				errexit("syntax error in line " NR)
+			}
+			if (forward2fi == 0 && conditions[ckcon(substr($0, RSTART + RLENGTH + 1))]) {
 				include_line = 1
 				forward2fi = 1
 			} else {
 				include_line = 0
 			}
+			last_cmd = "elif"
 			break
 		case ":else;":
-			check_concon()
-			if (in_else) {
-				print "Nesting isn't allowed" > "/dev/stderr"
-                                exit 1
+			if (last_cmd != "if" && last_cmd != "elif") {
+				errexit("syntax error in line " NR)
 			}
-			in_else = 1
 			if (forward2fi == 0) {
 				include_line = 1
 				forward2fi = 1
 			} else {
 				include_line = 0
 			}
+			last_cmd = "else"
 			break
 		case ":fi;":
-			check_concon()
+			if (last_cmd != "if" && last_cmd != "elif" && last_cmd != "else") {
+				errexit("syntax error in line " NR)
+			}
 			include_line = 1
 			forward2fi = 0
-			conditional_context = 0
-			in_else = 0
+			last_cmd = "fi"
 			break
 		default:
-			print "Unknow command" > "/dev/stderr"
-			exit 1
+			errexit("Unknow command in line " NR)
 	}
 }
 !/^#:.*/ {
-	if (include_line) {
+	if (include_line)
 		print
-	}
-}
-function ckcon(con) {
-	if (con in conditions == 0) {
-		print "Unknow condition" > "/dev/stderr"
-		exit 1
-	}
-	return con
-}
-function check_concon() {
-	if (conditional_context == 0) {
-		print "No conditional_context" > "/dev/stderr"
-		exit 1
-	}
 }
 # TODOs
 #:ifn: CON
