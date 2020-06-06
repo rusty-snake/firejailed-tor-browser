@@ -25,6 +25,9 @@
 #                                                         #
 ###########################################################
 
+# Report any issues at
+#  <https://github.com/rusty-snake/firejailed-tor-browser/issues/new>
+
 # Persistent local customizations
 include firejailed-tor-browser.local
 # Persistent global definitions
@@ -38,6 +41,7 @@ noblacklist ${HOME}/.firejailed-tor-browser
 
 blacklist /opt
 blacklist /srv
+blacklist /sys
 blacklist /usr/games
 blacklist /usr/local
 blacklist /usr/src
@@ -51,24 +55,20 @@ include disable-passwdmgr.inc
 include disable-programs.inc
 include disable-xdg.inc
 
-whitelist ${RUNUSER}/pulse
 whitelist ${HOME}/.firejailed-tor-browser
-# Add the next line to firejailed-tor-browser.local to enable better desktop integration
-#include whitelist-common.inc
+include whitelist-runuser-common.inc
 include whitelist-usr-share-common.inc
-include whitelist-var-common.inc
 
 apparmor
 caps.drop all
 #hostname host
-# Cause some issues
-#ipc-namespace
+# causes some graphics issues
+ipc-namespace
 # Breaks sound; enable it if you don't need sound
 #machine-id
 netfilter
 # Disable hardware acceleration
 #no3d
-nodbus
 nodvd
 nogroups
 nonewprivs
@@ -106,5 +106,8 @@ private-etc machine-id
 # Experimental
 #private-lib libX11-xcb.so.1,libXt.so.6
 private-tmp
+
+dbus-user none
+dbus-system none
 
 name firejailed-tor-browser
