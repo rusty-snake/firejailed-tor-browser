@@ -82,7 +82,6 @@ main()
     echo "[ Error ] <PATH_TO_TOR_BROWSER_ARCHIV> not given"
     exit 1
   fi
-  prepare_filesystem
   extract "$TBB_PATH"
   #"$(dirname "$0")"/update.sh
   (
