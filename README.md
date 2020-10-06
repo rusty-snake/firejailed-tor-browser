@@ -12,7 +12,7 @@
     * Create `${HOME}/.firejailed-tor-browser` and extract the tor-browser to it.
     * Copy the `firejailed-tor-browser.profile` file from this repo to `$HOME/.config/firejail/firejailed-tor-browser.profile`.
     * Copy the `firejailed-tor-browser.desktop` file from this repo to `$HOME/.local/share/applications/firejailed-tor-browser.desktop` and replace each occurrence of the string HOME with the content of `$HOME`.
-    * Add `blacklist ${HOME}/.firejailed-tor-browser` to `$HOME/.config/firejail/disable-programs.inc`
+    * Add `blacklist ${HOME}/.firejailed-tor-browser` to `$HOME/.config/firejail/disable-programs.local`
     * **Summary**
       ```bash
       $ mkdir $HOME/.firejailed-tor-browser
