@@ -1,0 +1,2 @@
+blacklist ${HOME}/.firejailed-tor-browser
+blacklist ${HOME}/.config/firejail
