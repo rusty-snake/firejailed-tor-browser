@@ -8,7 +8,6 @@ include /etc/firejail/globals.local
 # Note: PluggableTransports didn't work with this profile
 
 noblacklist ${HOME}/.firejailed-tor-browser
-noblacklist ${HOME}/.config/firejail
 
 blacklist /opt
 blacklist /run/dbus/system_bus_socket
@@ -23,7 +22,6 @@ include /etc/firejail/disable-passwdmgr.inc
 include /etc/firejail/disable-programs.inc
 
 whitelist ${HOME}/.firejailed-tor-browser
-whitelist ${HOME}/.config/firejail
 whitelist /usr/share/alsa
 whitelist /usr/share/applications
 whitelist /usr/share/ca-certificates
