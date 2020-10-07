@@ -1,4 +1,4 @@
-# Add the next two lines to firejailed-tor-browser.local to enable better desktop integration
+# Add the next line to firejailed-tor-browser.local to enable better desktop integration.
 include /etc/firejail/whitelist-common.inc
 
 private-bin cat,cp,cut,getconf,id,kdialog,ln,mkdir,pwd,readlink,realpath,sed,tail,test,update-desktop-database,xmessage,xmessage,zenity
