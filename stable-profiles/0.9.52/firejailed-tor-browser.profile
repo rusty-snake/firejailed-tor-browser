@@ -88,11 +88,9 @@ private ${HOME}/.firejailed-tor-browser
 private-bin bash,sh,grep,tail,env,expr,file,getconf,gpg,id,readlink,dirname,test,mkdir,python*,ln,sed,cp,rm,firejailed-tor-browser
 private-dev
 private-etc fonts
-#profile.template#L151-L162
 private-etc machine-id
 private-tmp
 
 name firejailed-tor-browser
-#noexec ${RUNUSER}
 noexec /dev/shm
 noexec /tmp
