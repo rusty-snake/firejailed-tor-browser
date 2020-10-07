@@ -1,7 +1,6 @@
-You need to add the following two statements:
+You need to add the following statement:
 ```
 blacklist ${HOME}/.firejailed-tor-browser
-blacklist ${HOME}/.config/firejail
 ```
 into `/etc/firejail/disable-programs.local` rather than `${HOME}/.config/firejail/disable-programs.local`.
 
