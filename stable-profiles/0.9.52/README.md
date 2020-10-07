@@ -14,3 +14,15 @@ then verify the change:
 $ ls -alh /etc/firejail/disable-programs.local
 -rw-r--r-- 1 root root 77 Oct  6 07:16 /etc/firejail/disable-programs.local
 ```
+
+Note: If the icon graphic does not appear in the Firetools menu (e.g. you see text characters) then you may also need to edit the `firejailed-tor-browser.desktop` file and enter the absoult path for the icon graphic.
+
+For example,
+
+Change the line from:
+
+`Icon=$HOME/.firejailed-tor-browser/Browser/browser/chrome/icons/default/default48.png`
+
+To the absolute path of your $HOME directory:
+
+`Icon=/home/user1/.firejailed-tor-browser/Browser/browser/chrome/icons/default/default48.png`
