@@ -15,7 +15,7 @@ $ ls -alh /etc/firejail/disable-programs.local
 -rw-r--r-- 1 root root 77 Oct  6 07:16 /etc/firejail/disable-programs.local
 ```
 
-Note: If the icon graphic does not appear in the Firetools menu (e.g. you see text characters) then you may also need to edit the `firejailed-tor-browser.desktop` file and enter the absoult path for the icon graphic.
+Note: If the icon graphic does not appear in the Firetools menu (e.g. you see text characters) then you may also need to edit the `firejailed-tor-browser.desktop` file and enter the absolute path for the icon graphic.
 
 For example,
 
