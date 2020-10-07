@@ -57,7 +57,7 @@ whitelist /usr/share/themes
 whitelist /usr/share/X11
 whitelist /usr/share/xml
 whitelist /usr/share/zoneinfo
-# Add the next two lines to firejailed-tor-browser.local to enable better desktop integration
+# Add the next line to firejailed-tor-browser.local to enable better desktop integration.
 #include /etc/firejail/whitelist-common.inc
 include /etc/firejail/whitelist-var-common.inc
 
