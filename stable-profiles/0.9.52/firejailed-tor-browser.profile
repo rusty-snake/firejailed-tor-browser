@@ -22,39 +22,7 @@ include /etc/firejail/disable-passwdmgr.inc
 include /etc/firejail/disable-programs.inc
 
 whitelist ${HOME}/.firejailed-tor-browser
-whitelist /usr/share/alsa
-whitelist /usr/share/applications
-whitelist /usr/share/ca-certificates
-whitelist /usr/share/ca-certificates-java
-whitelist /usr/share/dconf
-whitelist /usr/share/distro-info
-whitelist /usr/share/drirc.d
-whitelist /usr/share/enchant
-whitelist /usr/share/fontconfig
-whitelist /usr/share/fonts
-whitelist /usr/share/glib-2.0
-whitelist /usr/share/glvnd
-whitelist /usr/share/gtksourceview-3.0
-whitelist /usr/share/hunspell
-whitelist /usr/share/icons
-whitelist /usr/share/knotifications5
-whitelist /usr/share/kservices5
-whitelist /usr/share/kxmlgui5
-whitelist /usr/share/libdrm
-whitelist /usr/share/libthai
-whitelist /usr/share/locale
-whitelist /usr/share/mime
-whitelist /usr/share/misc
-whitelist /usr/share/p11-kit
-whitelist /usr/share/pixmaps
-whitelist /usr/share/qt5
-whitelist /usr/share/sounds
-whitelist /usr/share/tcltk/
-whitelist /usr/share/terminfo
-whitelist /usr/share/themes
-whitelist /usr/share/X11
-whitelist /usr/share/xml
-whitelist /usr/share/zoneinfo
+
 # Add the next line to firejailed-tor-browser.local to enable better desktop integration.
 #include /etc/firejail/whitelist-common.inc
 include /etc/firejail/whitelist-var-common.inc
