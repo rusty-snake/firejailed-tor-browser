@@ -1,4 +1,4 @@
-# Copyright (c) 2019 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
+# Copyright (c) 2019,2020 rusty-snake (https://github.com/rusty-snake) <print_hello_world+License@protonmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,9 @@
 # Backported profile for firejail 0.9.58
 #
 
+# Report any issues at
+#  <https://github.com/rusty-snake/firejailed-tor-browser/issues/new>
+
 # Persistent local customizations
 include firejailed-tor-browser.local
 # Persistent global definitions
@@ -41,9 +44,11 @@ noblacklist ${HOME}/.firejailed-tor-browser
 blacklist /opt
 blacklist /run/dbus/system_bus_socket
 blacklist /srv
+blacklist /sys
 blacklist /usr/games
 blacklist /usr/local
 blacklist /usr/src
+blacklist /var
 
 include disable-common.inc
 include disable-devel.inc
@@ -102,15 +107,12 @@ whitelist /usr/share/thumbnail.so
 whitelist /usr/share/X11
 whitelist /usr/share/xml
 whitelist /usr/share/zoneinfo
-# Add the next line to firejailed-tor-browser.local to enable better desktop integration
-#include whitelist-common.inc
-include whitelist-var-common.inc
 
 apparmor
 caps.drop all
 #hostname host
-# Cause some issues
-#ipc-namespace
+# causes some graphics issues
+ipc-namespace
 # Breaks sound; enable it if you don't need sound
 #machine-id
 netfilter
@@ -149,6 +151,9 @@ private-dev
 # To get ideas what maybe needs to be added look at the templates:
 # https://github.com/netblue30/firejail/blob/28142bbc49ecc3246033cbc810d7f04027c87f4d/etc/templates/profile.template#L151-L162
 private-etc machine-id
+# On Arch you maybe need to uncomment the following (or add to your firejailed-tor-browser.local).
+# See https://github.com/netblue30/firejail/issues/3158
+#private-etc ld.so.cache,ld.so.conf,ld.so.conf.d,ld.so.preload
 private-tmp
 
 name firejailed-tor-browser
