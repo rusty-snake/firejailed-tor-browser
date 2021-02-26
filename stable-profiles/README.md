@@ -16,4 +16,3 @@ or, if you use the manual install, download the profile and the .desktop file fo
 your firejail version instead of the files from the repo-root.
 
 For other special aspects see the README of the respective version.
-
