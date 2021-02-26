@@ -24,7 +24,7 @@ set -e
 umask 077
 
 BASE_URL="https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master"
-SUPPORTED_FIREJAIL_VERSIONS=("git" "0.9.62" "0.9.60" "0.9.58")
+SUPPORTED_FIREJAIL_VERSIONS=("git" "0.9.62" "0.9.58" "0.9.52")
 FIREJAIL_PROFILE_NAME="firejailed-tor-browser.profile"
 FIREJAIL_PROFILE_LOCATION="$HOME/.config/firejail"
 FIREJAIL_PROFILE_PATH="$FIREJAIL_PROFILE_LOCATION/$FIREJAIL_PROFILE_NAME"
@@ -137,7 +137,7 @@ download()
 
 fix_disable-programs()
 {
-  if [ "$FIREJAIL_VERSION" == "0.9.58" ]; then
+  if [ "$FIREJAIL_VERSION" = "0.9.58" -o "$FIREJAIL_VERSION" = "0.9.52" ]; then
     echo "[ Warning ] Fixing disbale-programs is only supported for firejail 0.9.60 and newer."
     echo "[ Info ] To fix disable-programs manualy execute the following as root if you know what it does:"
     echo "[ Info ]     sh -c 'echo \${HOME}/.firejailed-tor-browser' >> /etc/firejail/disable-programs.local"
