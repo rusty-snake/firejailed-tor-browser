@@ -26,11 +26,11 @@ umask 077
 BASE_URL="https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master"
 SUPPORTED_FIREJAIL_VERSIONS=("git" "0.9.62" "0.9.58" "0.9.52")
 FIREJAIL_PROFILE_NAME="firejailed-tor-browser.profile"
-FIREJAIL_PROFILE_LOCATION="$HOME/.config/firejail"
-FIREJAIL_PROFILE_PATH="$FIREJAIL_PROFILE_LOCATION/$FIREJAIL_PROFILE_NAME"
+FIREJAIL_PROFILE_DIR="$HOME/.config/firejail"
+FIREJAIL_PROFILE_PATH="$FIREJAIL_PROFILE_DIR/$FIREJAIL_PROFILE_NAME"
 DESKTOP_FILE_NAME="firejailed-tor-browser.desktop"
-DESKTOP_FILE_LOCATION="$HOME/.local/share/applications"
-DESKTOP_FILE_PATH="$DESKTOP_FILE_LOCATION/$DESKTOP_FILE_NAME"
+DESKTOP_FILE_DIR="$HOME/.local/share/applications"
+DESKTOP_FILE_PATH="$DESKTOP_FILE_DIR/$DESKTOP_FILE_NAME"
 
 usage()
 {
@@ -103,10 +103,10 @@ check_firejail_version()
 
 prepare_filesystem()
 {
-  mkdir -v -p "$FIREJAIL_PROFILE_LOCATION"
+  mkdir -v -p "$FIREJAIL_PROFILE_DIR"
   backup_file "$FIREJAIL_PROFILE_PATH"
 
-  mkdir -v -p "$DESKTOP_FILE_LOCATION"
+  mkdir -v -p "$DESKTOP_FILE_DIR"
   backup_file "$DESKTOP_FILE_PATH"
 
   echo "[ Ok ] Prepared filesystem."
@@ -160,7 +160,7 @@ fix_disable-programs()
 main()
 {
   parse_arguments "$@"
-  $HELP && usage
+  [[ $HELP == true ]] && usage  # usage executes exit
   check_firejail_version
   prepare_filesystem
   download

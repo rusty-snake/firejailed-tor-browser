@@ -68,7 +68,7 @@ parse_arguments()
       ;;
       *)
         TBB_PATH="$arg"
-	break
+        break
       ;;
     esac
   done
