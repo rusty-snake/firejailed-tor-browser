@@ -53,6 +53,7 @@ include disable-exec.inc
 include disable-interpreters.inc
 include disable-passwdmgr.inc
 include disable-programs.inc
+include disable-shell.inc
 include disable-xdg.inc
 
 whitelist ${HOME}/.firejailed-tor-browser
@@ -81,6 +82,7 @@ novideo
 protocol unix,inet,inet6
 seccomp !chroot,@memlock,@setuid,@timer,io_pgetevents
 seccomp.block-secondary
+seccomp-error-action kill
 shell none
 # Cause some issues
 #tracelog
