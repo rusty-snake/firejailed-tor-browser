@@ -39,10 +39,14 @@ ignore noexec ${HOME}
 
 noblacklist ${HOME}/.firejailed-tor-browser
 
+noblacklist ${PATH}/bash
+noblacklist ${PATH}/sh
+
 blacklist /opt
 blacklist /srv
 blacklist /sys
 blacklist /usr/games
+blacklist /usr/libexec
 blacklist /usr/local
 blacklist /usr/src
 blacklist /var
@@ -56,7 +60,9 @@ include disable-programs.inc
 include disable-shell.inc
 include disable-xdg.inc
 
-whitelist ${HOME}/.firejailed-tor-browser
+whitelist ${HOME}/Browser
+whitelist ${HOME}/start-tor-browser.desktop
+whitelist /run/user
 include whitelist-runuser-common.inc
 include whitelist-usr-share-common.inc
 
