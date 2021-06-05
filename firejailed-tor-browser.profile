@@ -60,8 +60,6 @@ include disable-programs.inc
 include disable-shell.inc
 include disable-xdg.inc
 
-whitelist ${HOME}/Browser
-whitelist ${HOME}/start-tor-browser.desktop
 whitelist /run/user
 include whitelist-runuser-common.inc
 include whitelist-usr-share-common.inc
@@ -78,6 +76,7 @@ netfilter
 #no3d
 nodvd
 nogroups
+noinput
 nonewprivs
 noroot
 # Disable sound, enable if you don't need
