@@ -24,7 +24,7 @@ set -e
 umask 077
 
 BASE_URL="https://raw.githubusercontent.com/rusty-snake/firejailed-tor-browser/master"
-SUPPORTED_FIREJAIL_VERSIONS=("git" "0.9.62" "0.9.58" "0.9.52")
+SUPPORTED_FIREJAIL_VERSIONS=("git" "0.9.64.4" "0.9.62" "0.9.58" "0.9.52")
 FIREJAIL_PROFILE_NAME="firejailed-tor-browser.profile"
 FIREJAIL_PROFILE_DIR="$HOME/.config/firejail"
 FIREJAIL_PROFILE_PATH="$FIREJAIL_PROFILE_DIR/$FIREJAIL_PROFILE_NAME"
