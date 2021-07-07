@@ -29,6 +29,7 @@ if [ "$1" == "--help" ]; then
 	echo " --all   remove all files create by install.sh"
 	echo ""
 	echo "If no parameters are passed, only backups are deleted."
+	exit 0
 fi
 
 if [ "$1" == "--all" ]; then
