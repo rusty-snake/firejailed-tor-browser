@@ -121,6 +121,9 @@ dbus-system none
 
 env MOZ_ENABLE_WAYLAND=1
 name firejailed-tor-browser
+read-only /tmp
+read-only ${HOME}
+read-write ${HOME}/Browser
 # rmenv DISPLAY -- does not work ATOW because tbb requires $DISPLAY to be set and not empty.
 env DISPLAY=wayland_is_better
 rmenv XAUTHORITY
