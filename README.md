@@ -26,6 +26,15 @@
     * List all interfaces: `ip addr show` or `ifconfig`
     * Add the interface with your internet connection to `firejailed-tor-browser.local`
     * Example: `echo 'net wlan0' >> "${HOME}/.config/firejail/firejailed-tor-browser.local"`
+  * Tor Browser 10.5 added Wayland support. If you still rely on X11, you need to add the following to your `firejailed-tor-browser.local`:
+    ```
+    noblacklist /tmp/.X11-unix
+    include whitelist-runuser-common.inc
+    ignore env MOZ_ENABLE_WAYLAND=1
+    ignore env DISPLAY=wayland_is_better
+    ignore rmenv DISPLAY
+    ignore rmenv XAUTHORIT
+    ```
 
 --------------------
 
