@@ -20,79 +20,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -e
+set -eo pipefail
 umask 077
 
-FTB_LOCATION="$HOME/.firejailed-tor-browser"
+# cd into the project directory
+cd -P -- "$(readlink -e "$(dirname "$0")")"
 
-usage()
+source _common.sh
+
+install_tb()
 {
-  cat << EOM
-Usage:
-    ./install.sh [OPTIONS] <PATH_TO_TOR_BROWSER_ARCHIV>
-
- OPTIONS:
-    --help,-h,-?        Show this help and exit.
-    --firejail=VERSION  Add --firejail=VERSION to the update.sh call
-EOM
-  exit
-}
-
-extract()
-{
-  if [ -e "$FTB_LOCATION" ]; then
-    mv "$FTB_LOCATION" "$FTB_LOCATION.bak-$(date --iso-8601=seconds)"
+  if [[ ! -e "$CFG_TBB_PATH" ]]; then
+    echo "[ Error ] Could not find '$CFG_TBB_PATH'"
+    exit 1
   fi
 
-  mkdir -p "$FTB_LOCATION"
+  create_backup "$FTB_HOME"
+  mkdir -p "$FTB_HOME"
 
   echo "[ Info ] Extracting the tor-browser ..."
-  tar -C "$FTB_LOCATION" --strip 1 -xJf "$1"
-  echo "[ Ok ] tor-browser extracted."
-}
-
-parse_arguments()
-{
-  HELP=false
-
-  for arg in "$@"; do
-    case $arg in
-      --help|-h|-\?)
-        HELP=true
-      ;;
-      --firejail=*)
-        FIREJAIL_VERSION="$arg"
-      ;;
-      --*|-?)
-        echo "[ Warning ] Unknow commandline argument: $arg"
-      ;;
-      *)
-        TBB_PATH="$arg"
-        break
-      ;;
-    esac
-  done
+  tar -C "$FTB_HOME" --strip 1 -xJf "$CFG_TBB_PATH"
+  echo "[ Ok ] tor-browser installed."
 }
 
 main()
 {
   parse_arguments "$@"
-  $HELP && usage
-  if [ ! -v TBB_PATH ]; then
-    echo "[ Error ] <PATH_TO_TOR_BROWSER_ARCHIV> not given"
-    exit 1
-  fi
-  extract "$TBB_PATH"
-  #"$(dirname "$0")"/update.sh
-  (
-    # shellcheck source=update.sh
-    . "$(dirname "$0")"/update.sh
-    parse_arguments "$FIREJAIL_VERSION"
-    check_firejail_version
-    prepare_filesystem
-    download
-    fix_disable-programs
-  )
+  install_de
+  install_fj
+  install_tb
 
   echo "[ Ok ] Done! The installation was successful, you can now launch the tor-browser by running:"
   echo "[ Ok ]   firejail --profile=firejailed-tor-browser \"\$HOME/Browser/start-tor-browser\""

@@ -35,9 +35,11 @@ fi
 if [ "$1" == "--all" ]; then
 	rm -r -f -v "${HOME}"/.firejailed-tor-browser*
 	rm -r -f -v "${HOME}"/.config/firejail/firejailed-tor-browser.profile*
+	rm -r -f -v "${HOME}"/.config/firejail/firejailed-tor-browser-x11.inc*
 	rm -r -f -v "${HOME}"/.local/share/applications/firejailed-tor-browser.desktop*
 else
 	rm -r -f -v "${HOME}"/.firejailed-tor-browser.bak-*
 	rm -r -f -v "${HOME}"/.config/firejail/firejailed-tor-browser.profile.bak-*
+	rm -r -f -v "${HOME}"/.config/firejail/firejailed-tor-browser-x11.inc.bak-*
 	rm -r -f -v "${HOME}"/.local/share/applications/firejailed-tor-browser.desktop.bak-*
 fi
