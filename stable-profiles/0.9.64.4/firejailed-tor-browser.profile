@@ -49,6 +49,7 @@ noblacklist ${PATH}/sh
 blacklist /opt
 blacklist /srv
 blacklist /sys
+blacklist /tmp/.X11-unix
 blacklist /usr/games
 blacklist /usr/libexec
 blacklist /usr/local
@@ -64,7 +65,8 @@ include disable-programs.inc
 include disable-shell.inc
 include disable-xdg.inc
 
-include whitelist-runuser-common.inc
+whitelist ${RUNUSER}/pulse/native
+whitelist ${RUNUSER}/wayland-0
 include whitelist-usr-share-common.inc
 
 apparmor
@@ -117,4 +119,11 @@ private-tmp
 dbus-user none
 dbus-system none
 
+env MOZ_ENABLE_WAYLAND=1
 name firejailed-tor-browser
+read-only /tmp
+read-only ${HOME}
+read-write ${HOME}/Browser
+# rmenv DISPLAY -- does not work ATOW because tbb requires $DISPLAY to be set and not empty.
+env DISPLAY=wayland_is_better
+rmenv XAUTHORITY
