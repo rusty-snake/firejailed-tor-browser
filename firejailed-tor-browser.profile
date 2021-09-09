@@ -48,6 +48,7 @@ noblacklist ${HOME}/.firejailed-tor-browser
 noblacklist ${PATH}/bash
 noblacklist ${PATH}/sh
 
+blacklist /etc
 blacklist /opt
 blacklist /srv
 blacklist /sys
