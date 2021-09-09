@@ -45,7 +45,6 @@ noblacklist ${PATH}/sh
 blacklist /opt
 blacklist /srv
 blacklist /sys
-blacklist /tmp/.X11-unix
 blacklist /usr/games
 blacklist /usr/libexec
 blacklist /usr/local
@@ -58,6 +57,7 @@ include disable-exec.inc
 include disable-interpreters.inc
 include disable-programs.inc
 include disable-shell.inc
+include disable-X11.inc
 include disable-xdg.inc
 
 whitelist /run/user
@@ -123,6 +123,5 @@ name firejailed-tor-browser
 read-only /tmp
 read-only ${HOME}
 read-write ${HOME}/Browser
-# rmenv DISPLAY -- does not work ATOW because tbb requires $DISPLAY to be set and not empty.
+# ATOW tbb requires $DISPLAY to be set and not empty.
 env DISPLAY=wayland_is_better
-rmenv XAUTHORITY
