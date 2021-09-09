@@ -30,10 +30,16 @@
 
 # Persistent local customizations
 include firejailed-tor-browser.local
-# Persistent global definitions
-include globals.local
 
 # Note: PluggableTransports didn't work with this profile
+
+# If you use X11:
+#include firejailed-tor-browser-x11.inc
+
+# If you use pulseaudio:
+#ignore machine-id
+#noblacklist /etc
+#private-etc machine-id
 
 ignore noexec ${HOME}
 
@@ -45,6 +51,7 @@ noblacklist ${PATH}/sh
 blacklist /opt
 blacklist /srv
 blacklist /sys
+blacklist /tmp
 blacklist /usr/games
 blacklist /usr/libexec
 blacklist /usr/local
@@ -63,15 +70,17 @@ include disable-xdg.inc
 whitelist /run/user
 whitelist ${RUNUSER}/pulse/native
 whitelist ${RUNUSER}/wayland-0
-include whitelist-usr-share-common.inc
+whitelist /usr/share/glib-2.0/schemas/gschemas.compiled
+whitelist /usr/share/icons/Adwaita
+whitelist /usr/share/mime/magic
+whitelist /usr/share/misc/magic
+whitelist /usr/share/X11/xkb
 
 apparmor
 caps.drop all
-#hostname host
-# causes some graphics issues
+hostname host
 ipc-namespace
-# Breaks sound; enable it if you don't need sound
-#machine-id
+machine-id
 netfilter
 # Disable hardware acceleration
 #no3d
@@ -90,29 +99,13 @@ seccomp !chroot,@memlock,@setuid,@timer,io_pgetevents
 seccomp.block-secondary
 seccomp-error-action kill
 shell none
-# Cause some issues
-#tracelog
 
 disable-mnt
 private ${HOME}/.firejailed-tor-browser
-# These are the minimum required programms to start the TBB,
-# you maybe need to add one or more programs from the commented private-bin line below.
-# To get full support of the scripts start-tor-browser, execdesktop and firefox
-# (this is a wrapper script, the firefox browser executable is firerfox.real) in the TBB,
-# add the commented private-bin line to firejailed-tor-browser.local
-private-bin bash,dirname,env,expr,file,grep,rm,sh,tclsh
-#private-bin cat,cp,cut,getconf,id,kdialog,ln,mkdir,pwd,readlink,realpath,sed,tail,test,update-desktop-database,xmessage,xmessage,zenity
+private-bin bash,dirname,env,expr,file,grep,rm,sh
 private-cache
 private-dev
-# This is a minimal private-etc, if there are breakages due it you need to add more files.
-# To get ideas what maybe needs to be added look at the templates:
-# https://github.com/netblue30/firejail/blob/28142bbc49ecc3246033cbc810d7f04027c87f4d/etc/templates/profile.template#L151-L162
-private-etc machine-id
-# On Arch you maybe need to uncomment the following (or add to your firejailed-tor-browser.local).
-# See https://github.com/netblue30/firejail/issues/3158
-#private-etc ld.so.cache,ld.so.conf,ld.so.conf.d,ld.so.preload
-# Experimental
-#private-lib libX11-xcb.so.1,libXt.so.6
+private-lib libpulse.so.0,libcanberra-gtk3.so.0,libXt.so.6
 private-tmp
 
 dbus-user none
@@ -120,7 +113,7 @@ dbus-system none
 
 env MOZ_ENABLE_WAYLAND=1
 name firejailed-tor-browser
-read-only /tmp
+read-only ${RUNUSER}
 read-only ${HOME}
 read-write ${HOME}/Browser
 # ATOW tbb requires $DISPLAY to be set and not empty.
