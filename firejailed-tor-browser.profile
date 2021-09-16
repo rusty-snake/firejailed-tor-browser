@@ -77,7 +77,6 @@ whitelist /usr/share/mime/magic
 whitelist /usr/share/misc/magic
 whitelist /usr/share/X11/xkb
 
-apparmor
 caps.drop all
 hostname host
 ipc-namespace
@@ -106,7 +105,7 @@ private ${HOME}/.firejailed-tor-browser
 private-bin bash,dirname,env,expr,file,grep,rm,sh
 private-cache
 private-dev
-private-lib libpulse.so.0,libcanberra-gtk3.so.0,libXt.so.6
+private-lib libcanberra-gtk3.so.0,libpulse.so.0,libXt.so.6
 private-tmp
 
 dbus-user none
