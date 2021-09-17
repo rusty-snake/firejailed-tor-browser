@@ -102,10 +102,10 @@ shell none
 
 disable-mnt
 private ${HOME}/.firejailed-tor-browser
-private-bin bash,dirname,env,expr,file,grep,rm,sh
+private-bin bash,dirname,env,expr,file,getconf,grep,rm,sh
 private-cache
 private-dev
-private-lib libcanberra-gtk3.so.0,libpulse.so.0,libXt.so.6
+#private-lib libcanberra-gtk3.so.0,libpulse.so.0,libXt.so.6
 private-tmp
 
 dbus-user none
