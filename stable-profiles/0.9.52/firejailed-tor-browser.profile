@@ -83,7 +83,7 @@ shell none
 
 disable-mnt
 private ${HOME}/.firejailed-tor-browser
-private-bin bash,sh,grep,tail,env,expr,file,getconf,gpg,id,readlink,dirname,test,mkdir,python*,ln,sed,cp,rm,firejailed-tor-browser
+private-bin bash,dirname,env,expr,file,getconf,grep,rm,sh
 private-dev
 # This is a minimal private-etc, if there are breakages due it you need to add more files.
 # To get ideas what maybe needs to be added look at the templates:

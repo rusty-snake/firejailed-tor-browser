@@ -143,8 +143,7 @@ private ${HOME}/.firejailed-tor-browser
 # To get full support of the scripts start-tor-browser, execdesktop and firefox
 # (this is a wrapper script, the firefox browser executable is firerfox.real) in the TBB,
 # add the commented private-bin line to firejailed-tor-browser.local
-private-bin bash,dirname,env,expr,file,grep,rm,sh,tclsh
-#private-bin cat,cp,cut,getconf,id,kdialog,ln,mkdir,pwd,readlink,realpath,sed,tail,test,update-desktop-database,xmessage,xmessage,zenity
+private-bin bash,dirname,env,expr,file,getconf,grep,rm,sh
 private-cache
 private-dev
 # This is a minimal private-etc, if there are breakages due it you need to add more files.
