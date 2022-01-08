@@ -26,7 +26,7 @@ FTB_DESKTOP_DEST="${XDG_DATA_HOME:-"$HOME"/.local/share}/applications/$FTB_DESKT
 FTB_LOCAL="firejailed-tor-browser.local"
 FTB_PROFILE="firejailed-tor-browser.profile"
 FTB_X11_INC="firejailed-tor-browser-x11.inc"
-SUPPORTED_FIREJAIL_VERSIONS=("git" "0.9.64.4" "0.9.62" "0.9.58" "0.9.52")
+SUPPORTED_FIREJAIL_VERSIONS=("git" "0.9.66" "0.9.64.4" "0.9.62" "0.9.58" "0.9.52")
 
 CFG_FIREJAIL_VERSION="git"
 CFG_SRC="."
