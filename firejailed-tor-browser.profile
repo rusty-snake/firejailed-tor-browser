@@ -45,8 +45,7 @@ ignore noexec ${HOME}
 
 noblacklist ${HOME}/.firejailed-tor-browser
 
-noblacklist ${PATH}/bash
-noblacklist ${PATH}/sh
+include allow-bin-sh.inc
 
 blacklist /etc
 blacklist /opt
