@@ -115,5 +115,3 @@ name firejailed-tor-browser
 read-only ${RUNUSER}
 read-only ${HOME}
 read-write ${HOME}/Browser
-# ATOW tbb requires $DISPLAY to be set and not empty.
-env DISPLAY=wayland_is_better
