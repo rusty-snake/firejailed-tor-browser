@@ -62,6 +62,7 @@ include disable-common.inc
 include disable-devel.inc
 include disable-exec.inc
 include disable-interpreters.inc
+include disable-proc.inc
 include disable-programs.inc
 include disable-shell.inc
 include disable-X11.inc
@@ -110,6 +111,7 @@ private-tmp
 dbus-user none
 dbus-system none
 
+env GTK_THEME=Adwaita
 env MOZ_ENABLE_WAYLAND=1
 name firejailed-tor-browser
 read-only ${RUNUSER}
