@@ -51,7 +51,7 @@ main()
   install_tb
 
   echo "[ Ok ] Done! The installation was successful, you can now launch the tor-browser by running:"
-  echo "[ Ok ]   firejail --profile=firejailed-tor-browser \"\$HOME/Browser/start-tor-browser\""
+  echo "[ Ok ]   firejail --profile=firejailed-tor-browser \"\$HOME/Browser/start-tor-browser\" --name=\"Tor Browser\""
 }
 
 [ "${BASH_SOURCE[0]}" == "$0" ] && main "$@";:
