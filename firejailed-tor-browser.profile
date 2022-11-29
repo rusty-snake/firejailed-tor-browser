@@ -98,14 +98,12 @@ protocol unix,inet,inet6
 seccomp !chroot,@memlock,@setuid,@timer,io_pgetevents
 seccomp.block-secondary
 seccomp-error-action kill
-shell none
 
 disable-mnt
 private ${HOME}/.firejailed-tor-browser
 private-bin bash,dirname,env,expr,file,getconf,grep,rm,sh
 private-cache
 private-dev
-#private-lib libcanberra-gtk3.so.0,libpulse.so.0,libXt.so.6
 private-tmp
 
 dbus-user none
@@ -114,6 +112,5 @@ dbus-system none
 env GTK_THEME=Adwaita
 env MOZ_ENABLE_WAYLAND=1
 name firejailed-tor-browser
-read-only ${RUNUSER}
 read-only ${HOME}
 read-write ${HOME}/Browser
