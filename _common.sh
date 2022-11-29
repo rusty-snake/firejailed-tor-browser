@@ -26,7 +26,7 @@ FTB_DESKTOP_DEST="${XDG_DATA_HOME:-"$HOME"/.local/share}/applications/$FTB_DESKT
 FTB_LOCAL="firejailed-tor-browser.local"
 FTB_PROFILE="firejailed-tor-browser.profile"
 FTB_X11_INC="firejailed-tor-browser-x11.inc"
-SUPPORTED_FIREJAIL_VERSIONS=("git" "0.9.66" "0.9.64.4" "0.9.62" "0.9.58" "0.9.52")
+SUPPORTED_FIREJAIL_VERSIONS=("git" "0.9.66" "0.9.64.4" "0.9.62" "0.9.58")
 
 CFG_FIREJAIL_VERSION="git"
 CFG_SRC="."
@@ -111,7 +111,7 @@ check_firejail_version()
 
 fix_disable-programs()
 {
-  if [[ "$FIREJAIL_VERSION" == "0.9.58" || "$FIREJAIL_VERSION" == "0.9.52" ]]; then
+  if [[ "$FIREJAIL_VERSION" == "0.9.58" ]]; then
     echo "[ Warning ] Fixing disbale-programs is only supported for firejail 0.9.60 and newer."
     echo "[ Info ] To fix disable-programs manualy execute the following as root if you know what it does:"
     echo "[ Info ]     sh -c 'echo \${HOME}/.firejailed-tor-browser' >> /etc/firejail/disable-programs.local"
