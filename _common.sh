@@ -67,7 +67,7 @@ parse_arguments()
         CFG_X11=yes
       ;;
       --*|-?)
-        echo "[ Warning ] Unknow commandline argument: $arg"
+        echo "[ Warning ] Unknown commandline argument: $arg"
       ;;
       *)
         CFG_TBB_PATH="$arg"
@@ -112,8 +112,8 @@ check_firejail_version()
 fix_disable-programs()
 {
   if [[ "$FIREJAIL_VERSION" == "0.9.58" ]]; then
-    echo "[ Warning ] Fixing disbale-programs is only supported for firejail 0.9.60 and newer."
-    echo "[ Info ] To fix disable-programs manualy execute the following as root if you know what it does:"
+    echo "[ Warning ] Fixing disable-programs is only supported for firejail 0.9.60 and newer."
+    echo "[ Info ] To fix disable-programs manually execute the following as root if you know what it does:"
     echo "[ Info ]     sh -c 'echo \${HOME}/.firejailed-tor-browser' >> /etc/firejail/disable-programs.local"
     return 0
   fi

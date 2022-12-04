@@ -50,7 +50,7 @@ main()
   install_fj
   install_tb
 
-  echo "[ Ok ] Done! The installation was successful, you can now launch the tor-browser by running:"
+  echo "[ Ok ] Done! The installation was successful, you can now launch Tor Browser by running:"
   echo "[ Ok ]   firejail --profile=firejailed-tor-browser \"\$HOME/Browser/start-tor-browser\" --name=\"Tor Browser\""
 }
 
