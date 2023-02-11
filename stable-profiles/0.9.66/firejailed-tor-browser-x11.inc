@@ -1,3 +1,4 @@
+# vim: ft=firejail
 ignore env DISPLAY=wayland_is_better
 ignore rmenv XAUTHORITY
 ignore hostname

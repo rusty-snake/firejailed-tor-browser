@@ -1,3 +1,4 @@
+# vim: ft=firejail
 # Copyright © 2019-2022 rusty-snake and contributors
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
