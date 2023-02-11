@@ -51,7 +51,6 @@ blacklist /etc
 blacklist /opt
 blacklist /srv
 blacklist /sys
-blacklist /tmp
 blacklist /usr/games
 blacklist /usr/libexec
 blacklist /usr/local
