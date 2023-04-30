@@ -95,7 +95,7 @@ notv
 nou2f
 novideo
 protocol unix,inet,inet6
-seccomp !chroot,@memlock,@setuid,@timer,io_pgetevents
+seccomp !chroot,!set_mempolicy,@memlock,@setuid,@timer,io_pgetevents
 seccomp.block-secondary
 seccomp-error-action kill
 
