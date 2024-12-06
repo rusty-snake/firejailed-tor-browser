@@ -1,3 +1,7 @@
+<table>
+ <tr><td><h1>⚠️ Unmaintained Project</h1></td></tr>
+</table>
+
 # HOWTO: Firejailed Tor Browser
 
   * Install [firejail](https://firejail.wordpress.com/) ([repo](https://github.com/netblue30/firejail)) latest git, or if you are using a stable firejail release,
